@@ -1,0 +1,41 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf320
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww15360\viewh13240\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 Lancement du raisonneur sur l'ontologie "Pizza.owl"\
+\
+R\'e9sultat : \
+2 classes apparaissent en rouge : "CheeseyVegetableTopping" et "IceCream"\
+\
+--- CheeseyVegetableTopping --\
+Une nouvelle ligne est apparue dans la section "Equivalent Classes", il s'agit de "Nothing", elle aussi color\'e9e en rouge.\
+Un clique sur "?" nous donne des informations sur les axioms sources des erreurs.\
+\
+- "CheeseTopping DisjointWith VegetableTopping"\
+- "CheeseyVegetableTopping SubClassOf CheeseTopping"\
+- "CheeseyVegetableTopping SubClassOf VegetableTopping"\
+\
+=> Dans un premier temps, il est indiqu\'e9 que les deux classes "CheeseTopping" et "VegetableTopping" sont disjointes, autrement dit, une classe ne peut \'eatre les deux \'e0 la fois. Cependant, les lignes suivantes indiquent que la classe "CheeseyVegetableTopping" h\'e9rite de ces derni\'e8re. Il y a ainsi un conflit.\
+\
+\
+--- IceCream ---\
+De la mani\'e8re que pour la classe pr\'e9c\'e9dent, la s\'e9lection de "?" donne des informations sur l'erreur.\
+\
+- "IceCream DisjointWith Pizza"\
+- "IceCream SubClassOf hasTopping some FruitTopping"\
+- "hasTopping Domain Pizza"\
+\
+=> "IceCream" et "Pizza" sont disjointes, "IceCream" a au moins une garniture de type "FruitTopping". Il est cependant d\'e9finit que la propri\'e9t\'e9 "hasTopping" a pour domaine "Pizza". Comme vu pr\'e9c\'e9demment, une classe ne peut \'eatre \'e0 la fois "IceCream" et "Pizza". Il y a donc un conflit.\
+\
+\
+\
+--- Notre ontologie ---\
+Il s'agit de la repr\'e9sentation des diff\'e9rents types de si\'e8ges possible.\
+Pour se faire, on consid\'e8re qu'un si\'e8ge est d\'e9coup\'e9 en 4 composants : l'assise, le dossier, les accoudoirs et les pieds.\
+Chacun a sa propre couleur ainsi que son propre mat\'e9riaux.\
+De plus, certain peuvent contenir un bourrage (pour \'eatre plus moelleux par exemple). On retrouve l'assise, le dossier et les accoudoirs. \
+\
+Cette d\'e9coupe permet de r\'e9aliser un grand nombre de combinaison de si\'e8ges possible.\
+Par exemple, une chaise de jardin, il s'agit d'un si\'e8ge compos\'e9 d'une assise, d'un dossier, de deux accoudoirs et de quatre pieds, le tout en plastique.		}

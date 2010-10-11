@@ -1,0 +1,4 @@
+PREFIX siege:<http://www.siege.org/ontologies/siege.owl#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?siege ?pied
+WHERE { ?siege siege:reposeSur ?pied}

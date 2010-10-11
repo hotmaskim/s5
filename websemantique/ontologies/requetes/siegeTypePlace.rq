@@ -1,0 +1,10 @@
+PREFIX siege:<http://www.siege.org/ontologies/siege.owl#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT *
+WHERE { ?siege a siege:Siege .
+   OPTIONAL {?siege a ?type . 
+                        FILTER (?type != <http://www.w3.org/2002/07/owl#Thing>) .
+                        FILTER (?type != siege:Siege)}
+   OPTIONAL {?siege siege:nombrePlace ?nbPlaces}
+}
+

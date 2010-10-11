@@ -1,0 +1,6 @@
+PREFIX siege:<http://www.siege.org/ontologies/siege.owl#>
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?Assises
+WHERE { ?Assises siege:estColoreEn siege:Marron .
+        ?Assises rdf:type siege:Assise
+	}

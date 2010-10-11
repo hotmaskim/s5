@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY pizza "http://www.pizza.com/ontologies/pizza.owl#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.pizza.com/ontologies/pizza.owl#"
+     xml:base="http://www.pizza.com/ontologies/pizza.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:pizza="http://www.pizza.com/ontologies/pizza.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="">
+        <rdfs:comment
+            >A pizza ontology that describes various pizzas
+based on their toppings</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasBase -->
+
+    <owl:ObjectProperty rdf:about="#hasBase">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="#Pizza"/>
+        <rdfs:range rdf:resource="#PizzaBase"/>
+        <rdfs:subPropertyOf rdf:resource="#hasIngredient"/>
+        <owl:inverseOf rdf:resource="#isBaseOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasIngredient -->
+
+    <owl:ObjectProperty rdf:about="#hasIngredient">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <owl:inverseOf rdf:resource="#isIngredientOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#hasTopping -->
+
+    <owl:ObjectProperty rdf:about="#hasTopping">
+        <rdfs:domain rdf:resource="#Pizza"/>
+        <rdfs:range rdf:resource="#PizzaTopping"/>
+        <rdfs:subPropertyOf rdf:resource="#hasIngredient"/>
+        <owl:inverseOf rdf:resource="#isToppingOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#isBaseOf -->
+
+    <owl:ObjectProperty rdf:about="#isBaseOf">
+        <rdfs:subPropertyOf rdf:resource="#isIngredientOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#isIngredientOf -->
+
+    <owl:ObjectProperty rdf:about="#isIngredientOf">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#isToppingOf -->
+
+    <owl:ObjectProperty rdf:about="#isToppingOf">
+        <rdfs:subPropertyOf rdf:resource="#isIngredientOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#CheeseTopping -->
+
+    <owl:Class rdf:about="#CheeseTopping">
+        <rdfs:subClassOf rdf:resource="#PizzaTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#DeepPanBase -->
+
+    <owl:Class rdf:about="#DeepPanBase">
+        <rdfs:subClassOf rdf:resource="#PizzaBase"/>
+        <owl:disjointWith rdf:resource="#ThinAndCrispyBase"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#GreenPepperTopping -->
+
+    <owl:Class rdf:about="#GreenPepperTopping">
+        <rdfs:subClassOf rdf:resource="#PepperTopping"/>
+        <owl:disjointWith rdf:resource="#RedPepperTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#HamTopping -->
+
+    <owl:Class rdf:about="#HamTopping">
+        <rdfs:subClassOf rdf:resource="#MeatTopping"/>
+        <owl:disjointWith rdf:resource="#PepperoniTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MargheritaPizza -->
+
+    <owl:Class rdf:about="#MargheritaPizza">
+        <rdfs:subClassOf rdf:resource="#NamedPizza"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasTopping"/>
+                <owl:someValuesFrom rdf:resource="#TomatoTopping"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasTopping"/>
+                <owl:someValuesFrom rdf:resource="#MozzarellaTopping"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment
+            >A pizza that only has Mozarella and Tomato toppings</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MeatTopping -->
+
+    <owl:Class rdf:about="#MeatTopping">
+        <rdfs:subClassOf rdf:resource="#PizzaTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MozzarellaTopping -->
+
+    <owl:Class rdf:about="#MozzarellaTopping">
+        <rdfs:subClassOf rdf:resource="#CheeseTopping"/>
+        <owl:disjointWith rdf:resource="#ParmezanTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#MushroomTopping -->
+
+    <owl:Class rdf:about="#MushroomTopping">
+        <rdfs:subClassOf rdf:resource="#VegetableTopping"/>
+        <owl:disjointWith rdf:resource="#PepperTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#NamedPizza -->
+
+    <owl:Class rdf:about="#NamedPizza">
+        <rdfs:subClassOf rdf:resource="#Pizza"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#ParmezanTopping -->
+
+    <owl:Class rdf:about="#ParmezanTopping">
+        <rdfs:subClassOf rdf:resource="#CheeseTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PepperTopping -->
+
+    <owl:Class rdf:about="#PepperTopping">
+        <rdfs:subClassOf rdf:resource="#VegetableTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PepperoniTopping -->
+
+    <owl:Class rdf:about="#PepperoniTopping">
+        <rdfs:subClassOf rdf:resource="#MeatTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#Pizza -->
+
+    <owl:Class rdf:about="#Pizza">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasBase"/>
+                <owl:someValuesFrom rdf:resource="#PizzaBase"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PizzaBase -->
+
+    <owl:Class rdf:about="#PizzaBase"/>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#PizzaBase"/>
+        </owl:members>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#PizzaTopping -->
+
+    <owl:Class rdf:about="#PizzaTopping"/>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#RedPepperTopping -->
+
+    <owl:Class rdf:about="#RedPepperTopping">
+        <rdfs:subClassOf rdf:resource="#PepperTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#ThinAndCrispyBase -->
+
+    <owl:Class rdf:about="#ThinAndCrispyBase">
+        <rdfs:subClassOf rdf:resource="#PizzaBase"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#TomatoTopping -->
+
+    <owl:Class rdf:about="#TomatoTopping">
+        <rdfs:subClassOf rdf:resource="#VegetableTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.pizza.com/ontologies/pizza.owl#VegetableTopping -->
+
+    <owl:Class rdf:about="#VegetableTopping">
+        <rdfs:subClassOf rdf:resource="#PizzaTopping"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#CheeseTopping"/>
+            <rdf:Description rdf:about="#MeatTopping"/>
+            <rdf:Description rdf:about="#VegetableTopping"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Pizza"/>
+            <rdf:Description rdf:about="#PizzaBase"/>
+            <rdf:Description rdf:about="#PizzaTopping"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
+

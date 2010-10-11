@@ -1,0 +1,738 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY einsteins_riddle_en "http://www.iis.nsk.su/persons/ponom/ontologies/einsteins_riddle_en.owl#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2006/12/owl2-xml#"
+     xml:base="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:einsteins_riddle_en="http://www.iis.nsk.su/persons/ponom/ontologies/einsteins_riddle_en.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     URI="http://www.iis.nsk.su/persons/ponom/ontologies/einsteins_riddle_en.owl">
+    <Annotation annotationURI="&dc;creator">
+        <Constant datatypeURI="&xsd;string"
+            >Denis Ponomaryov</Constant>
+    </Annotation>
+    <Annotation annotationURI="&dc;date">
+        <Constant datatypeURI="&xsd;string"
+            >February, 5, 2010</Constant>
+    </Annotation>
+    <Annotation annotationURI="&dc;description">
+        <Constant datatypeURI="&xsd;string"
+            >   1. There are five houses.
+   2. The Englishman lives in the red house.
+   3. The Spaniard owns the dog.
+   4. Coffee is drunk in the green house.
+   5. The Ukrainian drinks tea.
+   6. The green house is immediately to the right of the ivory house.
+   7. The Old Gold smoker owns snails.
+   8. Kools are smoked in the yellow house.
+   9. Milk is drunk in the middle house.
+  10. The Norwegian lives in the first house.
+  11. The man who smokes Chesterfields lives in the house next to the man with the fox.
+  12. Kools are smoked in a house next to the house where the horse is kept. 
+  13. The Lucky Strike smoker drinks orange juice.
+  14. The Japanese smokes Parliaments.
+  15. The Norwegian lives next to the blue house.
+
+Now, who drinks water? Who owns the zebra?
+
+In the interest of clarity, it must be added that each of the five houses is painted a different color, has a single inhabitant, and the inhabitants are of different national extractions, own different pets, drink different beverages and smoke different brands of American cigarettes. In statement 6, right refers to the reader&#39;s right.</Constant>
+    </Annotation>
+    <EquivalentClasses>
+        <Class URI="&einsteins_riddle_en;Beverage"/>
+        <ObjectOneOf>
+            <Individual URI="&einsteins_riddle_en;coffee"/>
+            <Individual URI="&einsteins_riddle_en;milk"/>
+            <Individual URI="&einsteins_riddle_en;water"/>
+            <Individual URI="&einsteins_riddle_en;tea"/>
+            <Individual URI="&einsteins_riddle_en;orange_juice"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class URI="&einsteins_riddle_en;Beverage"/>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+            </InverseObjectProperty>
+            <Class URI="&einsteins_riddle_en;Man"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <Declaration>
+        <Class URI="&einsteins_riddle_en;Beverage"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class URI="&einsteins_riddle_en;Cigarette"/>
+        <ObjectOneOf>
+            <Individual URI="&einsteins_riddle_en;Old_Gold"/>
+            <Individual URI="&einsteins_riddle_en;Kools"/>
+            <Individual URI="&einsteins_riddle_en;Lucky_Strike"/>
+            <Individual URI="&einsteins_riddle_en;Chesterfields"/>
+            <Individual URI="&einsteins_riddle_en;Parliaments"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class URI="&einsteins_riddle_en;Cigarette"/>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+            </InverseObjectProperty>
+            <Class URI="&einsteins_riddle_en;Man"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <Declaration>
+        <Class URI="&einsteins_riddle_en;Cigarette"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class URI="&einsteins_riddle_en;Color"/>
+        <ObjectOneOf>
+            <Individual URI="&einsteins_riddle_en;blue"/>
+            <Individual URI="&einsteins_riddle_en;ivory"/>
+            <Individual URI="&einsteins_riddle_en;red"/>
+            <Individual URI="&einsteins_riddle_en;yellow"/>
+            <Individual URI="&einsteins_riddle_en;green"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class URI="&einsteins_riddle_en;Color"/>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+            </InverseObjectProperty>
+            <Class URI="&einsteins_riddle_en;House"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <Declaration>
+        <Class URI="&einsteins_riddle_en;Color"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class URI="&einsteins_riddle_en;House"/>
+        <ObjectOneOf>
+            <Individual URI="&einsteins_riddle_en;house-2"/>
+            <Individual URI="&einsteins_riddle_en;house-5"/>
+            <Individual URI="&einsteins_riddle_en;house-1"/>
+            <Individual URI="&einsteins_riddle_en;house-3"/>
+            <Individual URI="&einsteins_riddle_en;house-4"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class URI="&einsteins_riddle_en;House"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+                <Class URI="&einsteins_riddle_en;Color"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <InverseObjectProperty>
+                    <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                </InverseObjectProperty>
+                <Class URI="&einsteins_riddle_en;Man"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <Declaration>
+        <Class URI="&einsteins_riddle_en;House"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class URI="&einsteins_riddle_en;Man"/>
+        <ObjectOneOf>
+            <Individual URI="&einsteins_riddle_en;Spaniard"/>
+            <Individual URI="&einsteins_riddle_en;Englishman"/>
+            <Individual URI="&einsteins_riddle_en;Norwegian"/>
+            <Individual URI="&einsteins_riddle_en;Ukrainian"/>
+            <Individual URI="&einsteins_riddle_en;Japanese"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class URI="&einsteins_riddle_en;Man"/>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+                <Class URI="&einsteins_riddle_en;Beverage"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                <Class URI="&einsteins_riddle_en;House"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+                <Class URI="&einsteins_riddle_en;Pet"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+                <Class URI="&einsteins_riddle_en;Cigarette"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <Declaration>
+        <Class URI="&einsteins_riddle_en;Man"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class URI="&einsteins_riddle_en;Pet"/>
+        <ObjectOneOf>
+            <Individual URI="&einsteins_riddle_en;dog"/>
+            <Individual URI="&einsteins_riddle_en;zebra"/>
+            <Individual URI="&einsteins_riddle_en;fox"/>
+            <Individual URI="&einsteins_riddle_en;horse"/>
+            <Individual URI="&einsteins_riddle_en;snails"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class URI="&einsteins_riddle_en;Pet"/>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+            </InverseObjectProperty>
+            <Class URI="&einsteins_riddle_en;Man"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <Declaration>
+        <Class URI="&einsteins_riddle_en;Pet"/>
+    </Declaration>
+    <FunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+        <Class URI="&einsteins_riddle_en;Man"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+        <Class URI="&einsteins_riddle_en;Beverage"/>
+    </ObjectPropertyRange>
+    <Declaration>
+        <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+    </Declaration>
+    <FunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+        <Class URI="&einsteins_riddle_en;House"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+        <Class URI="&einsteins_riddle_en;Color"/>
+    </ObjectPropertyRange>
+    <Declaration>
+        <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+    </Declaration>
+    <FunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+        <Class URI="&einsteins_riddle_en;Man"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+        <Class URI="&einsteins_riddle_en;House"/>
+    </ObjectPropertyRange>
+    <Declaration>
+        <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+    </Declaration>
+    <FunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+        <Class URI="&einsteins_riddle_en;Man"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+        <Class URI="&einsteins_riddle_en;Pet"/>
+    </ObjectPropertyRange>
+    <Declaration>
+        <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+    </Declaration>
+    <FunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+        <Class URI="&einsteins_riddle_en;House"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+        <Class URI="&einsteins_riddle_en;House"/>
+    </ObjectPropertyRange>
+    <Declaration>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+    </Declaration>
+    <FunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+        <Class URI="&einsteins_riddle_en;Man"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+        <Class URI="&einsteins_riddle_en;Cigarette"/>
+    </ObjectPropertyRange>
+    <Declaration>
+        <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >11. The man who smokes Chesterfields lives in the house next to the man with the fox.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+            </InverseObjectProperty>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                <ObjectUnionOf>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+                        <ObjectSomeValuesFrom>
+                            <InverseObjectProperty>
+                                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                            </InverseObjectProperty>
+                            <ObjectHasValue>
+                                <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+                                <Individual URI="&einsteins_riddle_en;fox"/>
+                            </ObjectHasValue>
+                        </ObjectSomeValuesFrom>
+                    </ObjectSomeValuesFrom>
+                    <ObjectSomeValuesFrom>
+                        <InverseObjectProperty>
+                            <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+                        </InverseObjectProperty>
+                        <ObjectSomeValuesFrom>
+                            <InverseObjectProperty>
+                                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                            </InverseObjectProperty>
+                            <ObjectHasValue>
+                                <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+                                <Individual URI="&einsteins_riddle_en;fox"/>
+                            </ObjectHasValue>
+                        </ObjectSomeValuesFrom>
+                    </ObjectSomeValuesFrom>
+                </ObjectUnionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;Chesterfields"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Chesterfields"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >2. The Englishman lives in the red house.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+            <ObjectHasValue>
+                <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+                <Individual URI="&einsteins_riddle_en;red"/>
+            </ObjectHasValue>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;Englishman"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Englishman"/>
+    </Declaration>
+    <ObjectPropertyAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >14. The Japanese smokes Parliaments.</Constant>
+        </Annotation>
+        <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+        <Individual URI="&einsteins_riddle_en;Japanese"/>
+        <Individual URI="&einsteins_riddle_en;Parliaments"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Japanese"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >12. Kools are smoked in the house next to the house where the horse is kept.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+            </InverseObjectProperty>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                <ObjectUnionOf>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+                        <ObjectSomeValuesFrom>
+                            <InverseObjectProperty>
+                                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                            </InverseObjectProperty>
+                            <ObjectHasValue>
+                                <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+                                <Individual URI="&einsteins_riddle_en;horse"/>
+                            </ObjectHasValue>
+                        </ObjectSomeValuesFrom>
+                    </ObjectSomeValuesFrom>
+                    <ObjectSomeValuesFrom>
+                        <InverseObjectProperty>
+                            <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+                        </InverseObjectProperty>
+                        <ObjectSomeValuesFrom>
+                            <InverseObjectProperty>
+                                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                            </InverseObjectProperty>
+                            <ObjectHasValue>
+                                <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+                                <Individual URI="&einsteins_riddle_en;horse"/>
+                            </ObjectHasValue>
+                        </ObjectSomeValuesFrom>
+                    </ObjectSomeValuesFrom>
+                </ObjectUnionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;Kools"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >8. Kools are smoked in the yellow house.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+            </InverseObjectProperty>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                <ObjectHasValue>
+                    <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+                    <Individual URI="&einsteins_riddle_en;yellow"/>
+                </ObjectHasValue>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;Kools"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Kools"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >13. The Lucky Strike smoker drinks orange juice.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+            </InverseObjectProperty>
+            <ObjectHasValue>
+                <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+                <Individual URI="&einsteins_riddle_en;orange_juice"/>
+            </ObjectHasValue>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;Lucky_Strike"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Lucky_Strike"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >15. The Norwegian lives next to the blue house.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+            <ObjectUnionOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+                    <ObjectHasValue>
+                        <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+                        <Individual URI="&einsteins_riddle_en;blue"/>
+                    </ObjectHasValue>
+                </ObjectSomeValuesFrom>
+                <ObjectSomeValuesFrom>
+                    <InverseObjectProperty>
+                        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+                    </InverseObjectProperty>
+                    <ObjectHasValue>
+                        <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+                        <Individual URI="&einsteins_riddle_en;blue"/>
+                    </ObjectHasValue>
+                </ObjectSomeValuesFrom>
+            </ObjectUnionOf>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;Norwegian"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >10. The Norwegian lives in the first house.</Constant>
+        </Annotation>
+        <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+        <Individual URI="&einsteins_riddle_en;Norwegian"/>
+        <Individual URI="&einsteins_riddle_en;house-1"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Norwegian"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >7. The Old Gold smoker owns snails.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;smokes"/>
+            </InverseObjectProperty>
+            <ObjectHasValue>
+                <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+                <Individual URI="&einsteins_riddle_en;snails"/>
+            </ObjectHasValue>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;Old_Gold"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Old_Gold"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Parliaments"/>
+    </Declaration>
+    <DifferentIndividuals>
+        <Individual URI="&einsteins_riddle_en;Spaniard"/>
+        <Individual URI="&einsteins_riddle_en;house-2"/>
+        <Individual URI="&einsteins_riddle_en;coffee"/>
+        <Individual URI="&einsteins_riddle_en;blue"/>
+        <Individual URI="&einsteins_riddle_en;ivory"/>
+        <Individual URI="&einsteins_riddle_en;zebra"/>
+        <Individual URI="&einsteins_riddle_en;orange_juice"/>
+        <Individual URI="&einsteins_riddle_en;Ukrainian"/>
+        <Individual URI="&einsteins_riddle_en;horse"/>
+        <Individual URI="&einsteins_riddle_en;water"/>
+        <Individual URI="&einsteins_riddle_en;yellow"/>
+        <Individual URI="&einsteins_riddle_en;dog"/>
+        <Individual URI="&einsteins_riddle_en;Englishman"/>
+        <Individual URI="&einsteins_riddle_en;house-5"/>
+        <Individual URI="&einsteins_riddle_en;Lucky_Strike"/>
+        <Individual URI="&einsteins_riddle_en;house-3"/>
+        <Individual URI="&einsteins_riddle_en;tea"/>
+        <Individual URI="&einsteins_riddle_en;Kools"/>
+        <Individual URI="&einsteins_riddle_en;Chesterfields"/>
+        <Individual URI="&einsteins_riddle_en;Parliaments"/>
+        <Individual URI="&einsteins_riddle_en;milk"/>
+        <Individual URI="&einsteins_riddle_en;Old_Gold"/>
+        <Individual URI="&einsteins_riddle_en;red"/>
+        <Individual URI="&einsteins_riddle_en;green"/>
+        <Individual URI="&einsteins_riddle_en;Norwegian"/>
+        <Individual URI="&einsteins_riddle_en;house-1"/>
+        <Individual URI="&einsteins_riddle_en;house-4"/>
+        <Individual URI="&einsteins_riddle_en;fox"/>
+        <Individual URI="&einsteins_riddle_en;snails"/>
+        <Individual URI="&einsteins_riddle_en;Japanese"/>
+    </DifferentIndividuals>
+    <ObjectPropertyAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >3. The Spaniard owns the dog.</Constant>
+        </Annotation>
+        <ObjectProperty URI="&einsteins_riddle_en;owns"/>
+        <Individual URI="&einsteins_riddle_en;Spaniard"/>
+        <Individual URI="&einsteins_riddle_en;dog"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Spaniard"/>
+    </Declaration>
+    <ObjectPropertyAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >5. The Ukrainian drinks tea.</Constant>
+        </Annotation>
+        <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+        <Individual URI="&einsteins_riddle_en;Ukrainian"/>
+        <Individual URI="&einsteins_riddle_en;tea"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;Ukrainian"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;blue"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >4. Coffee is drunk in the green house.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+            </InverseObjectProperty>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                <ObjectHasValue>
+                    <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+                    <Individual URI="&einsteins_riddle_en;green"/>
+                </ObjectHasValue>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;coffee"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;coffee"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;dog"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;fox"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >6. The green house is immediately to the right of the ivory house.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+            </InverseObjectProperty>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+                <ObjectHasValue>
+                    <ObjectProperty URI="&einsteins_riddle_en;has_color"/>
+                    <Individual URI="&einsteins_riddle_en;ivory"/>
+                </ObjectHasValue>
+            </ObjectSomeValuesFrom>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;green"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;green"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;horse"/>
+    </Declaration>
+    <ClassAssertion>
+        <ObjectAllValuesFrom>
+            <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+            <Class URI="&owl;Nothing"/>
+        </ObjectAllValuesFrom>
+        <Individual URI="&einsteins_riddle_en;house-1"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;house-1"/>
+    </Declaration>
+    <ObjectPropertyAssertion>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+        <Individual URI="&einsteins_riddle_en;house-2"/>
+        <Individual URI="&einsteins_riddle_en;house-1"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;house-2"/>
+    </Declaration>
+    <ObjectPropertyAssertion>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+        <Individual URI="&einsteins_riddle_en;house-3"/>
+        <Individual URI="&einsteins_riddle_en;house-2"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;house-3"/>
+    </Declaration>
+    <ObjectPropertyAssertion>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+        <Individual URI="&einsteins_riddle_en;house-4"/>
+        <Individual URI="&einsteins_riddle_en;house-3"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;house-4"/>
+    </Declaration>
+    <ClassAssertion>
+        <ObjectAllValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+            </InverseObjectProperty>
+            <Class URI="&owl;Nothing"/>
+        </ObjectAllValuesFrom>
+        <Individual URI="&einsteins_riddle_en;house-5"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty URI="&einsteins_riddle_en;right_to"/>
+        <Individual URI="&einsteins_riddle_en;house-5"/>
+        <Individual URI="&einsteins_riddle_en;house-4"/>
+    </ObjectPropertyAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;house-5"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;ivory"/>
+    </Declaration>
+    <ClassAssertion>
+        <Annotation annotationURI="&rdfs;comment">
+            <Constant datatypeURI="&xsd;string"
+                >9. Milk is drunk in the middle house.</Constant>
+        </Annotation>
+        <ObjectSomeValuesFrom>
+            <InverseObjectProperty>
+                <ObjectProperty URI="&einsteins_riddle_en;drinks"/>
+            </InverseObjectProperty>
+            <ObjectHasValue>
+                <ObjectProperty URI="&einsteins_riddle_en;lives_in"/>
+                <Individual URI="&einsteins_riddle_en;house-3"/>
+            </ObjectHasValue>
+        </ObjectSomeValuesFrom>
+        <Individual URI="&einsteins_riddle_en;milk"/>
+    </ClassAssertion>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;milk"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;orange_juice"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;red"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;snails"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;tea"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;water"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;yellow"/>
+    </Declaration>
+    <Declaration>
+        <Individual URI="&einsteins_riddle_en;zebra"/>
+    </Declaration>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->

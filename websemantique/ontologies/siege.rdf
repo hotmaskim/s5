@@ -1,0 +1,1489 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY siege "http://www.siege.org/ontologies/siege.owl#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.siege.org/ontologies/siege.owl#"
+     xml:base="http://www.siege.org/ontologies/siege.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:siege="http://www.siege.org/ontologies/siege.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about=""/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;label"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#bourre -->
+
+    <owl:ObjectProperty rdf:about="#bourre">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : un bourrage est contenu dans un certain composant</rdfs:comment>
+        <rdfs:domain rdf:resource="#Bourrage"/>
+        <rdfs:range rdf:resource="#ComposantBourrable"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#colore -->
+
+    <owl:ObjectProperty rdf:about="#colore">
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : Une couleur colore un certain composant</rdfs:comment>
+        <rdfs:range rdf:resource="#Composant"/>
+        <rdfs:domain rdf:resource="#Couleur"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#estBourreDe -->
+
+    <owl:ObjectProperty rdf:about="#estBourreDe">
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : un composant est remplis d&#39;un certain bourrage</rdfs:comment>
+        <rdfs:range rdf:resource="#Bourrage"/>
+        <rdfs:domain rdf:resource="#ComposantBourrable"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#estColoreEn -->
+
+    <owl:ObjectProperty rdf:about="#estColoreEn">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : Un composant est color&#233; en</rdfs:comment>
+        <rdfs:domain rdf:resource="#Composant"/>
+        <rdfs:range rdf:resource="#Couleur"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#estEn -->
+
+    <owl:ObjectProperty rdf:about="#estEn">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : un composant est fait dans une certaine mati&#232;re</rdfs:comment>
+        <rdfs:domain rdf:resource="#Composant"/>
+        <rdfs:range rdf:resource="#Matiere"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#estIncluPar -->
+
+    <owl:ObjectProperty rdf:about="#estIncluPar">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : un composant  est inclus pas un certain si&#232;ge</rdfs:comment>
+        <rdfs:domain rdf:resource="#Composant"/>
+        <rdfs:range rdf:resource="#Siege"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#estLaMatiereDe -->
+
+    <owl:ObjectProperty rdf:about="#estLaMatiereDe">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : cette mati&#232;re est celle d&#39;un certain composant</rdfs:comment>
+        <rdfs:range rdf:resource="#Composant"/>
+        <rdfs:domain rdf:resource="#Matiere"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#inclut -->
+
+    <owl:ObjectProperty rdf:about="#inclut">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : un si&#232;ge inclut un certain composant</rdfs:comment>
+        <rdfs:range rdf:resource="#Composant"/>
+        <rdfs:domain rdf:resource="#Siege"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#reposeSur -->
+
+    <owl:ObjectProperty rdf:about="#reposeSur">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : un si&#232;ge repose sur un certain pied</rdfs:comment>
+        <rdfs:range rdf:resource="#Pied"/>
+        <rdfs:domain rdf:resource="#Siege"/>
+        <rdfs:subPropertyOf rdf:resource="#inclut"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#supporte -->
+
+    <owl:ObjectProperty rdf:about="#supporte">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente la relation : un pied supporte un certain si&#232;ge</rdfs:comment>
+        <rdfs:domain rdf:resource="#Pied"/>
+        <rdfs:range rdf:resource="#Siege"/>
+        <rdfs:subPropertyOf rdf:resource="#estIncluPar"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#dimension -->
+
+    <owl:DatatypeProperty rdf:about="#dimension">
+        <rdfs:comment xml:lang="fr"
+            >Correspond aux dimension du si&#232;ge</rdfs:comment>
+        <rdfs:domain rdf:resource="#Siege"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#hauteur -->
+
+    <owl:DatatypeProperty rdf:about="#hauteur">
+        <rdfs:comment
+            >Hauteur du si&#232;ge</rdfs:comment>
+        <rdfs:domain rdf:resource="#Siege"/>
+        <rdfs:subPropertyOf rdf:resource="#dimension"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#largeur -->
+
+    <owl:DatatypeProperty rdf:about="#largeur">
+        <rdfs:comment
+            >Largeur du si&#232;ge</rdfs:comment>
+        <rdfs:domain rdf:resource="#Siege"/>
+        <rdfs:subPropertyOf rdf:resource="#dimension"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#longueur -->
+
+    <owl:DatatypeProperty rdf:about="#longueur">
+        <rdfs:label
+            >Longueur du si&#232;ge</rdfs:label>
+        <rdfs:domain rdf:resource="#Siege"/>
+        <rdfs:subPropertyOf rdf:resource="#dimension"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#nom -->
+
+    <owl:DatatypeProperty rdf:about="#nom">
+        <rdfs:comment xml:lang="fr">Nom du si&#232;ge</rdfs:comment>
+        <rdfs:domain rdf:resource="#Siege"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#nombrePlace -->
+
+    <owl:DatatypeProperty rdf:about="#nombrePlace">
+        <rdfs:comment xml:lang="fr"
+            >Nombre de place maximal du si&#232;ge</rdfs:comment>
+        <rdfs:domain rdf:resource="#Siege"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Acier -->
+
+    <owl:Class rdf:about="#Acier">
+        <rdfs:subClassOf rdf:resource="#Metal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Acoudoir -->
+
+    <owl:Class rdf:about="#Acoudoir">
+        <rdfs:subClassOf rdf:resource="#ComposantBourrable"/>
+        <rdfs:comment xml:lang="fr"
+            >Classe permettant de repr&#233;senter un acoudoir</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AcoudoirEnBois -->
+
+    <owl:Class rdf:about="#AcoudoirEnBois">
+        <rdfs:subClassOf rdf:resource="#Acoudoir"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#estBourreDe"/>
+                        <owl:someValuesFrom rdf:resource="#Bourrage"/>
+                    </owl:Restriction>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Bois"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AcoudoirEnCuir -->
+
+    <owl:Class rdf:about="#AcoudoirEnCuir">
+        <rdfs:subClassOf rdf:resource="#Acoudoir"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estBourreDe"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Mousse"/>
+                            <rdf:Description rdf:about="#Plume"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Cuir"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AcoudoirEnMetal -->
+
+    <owl:Class rdf:about="#AcoudoirEnMetal">
+        <rdfs:subClassOf rdf:resource="#Acoudoir"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#estBourreDe"/>
+                        <owl:someValuesFrom rdf:resource="#Bourrage"/>
+                    </owl:Restriction>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Metal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AcoudoirEnTissu -->
+
+    <owl:Class rdf:about="#AcoudoirEnTissu">
+        <rdfs:subClassOf rdf:resource="#Acoudoir"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estBourreDe"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Mousse"/>
+                            <rdf:Description rdf:about="#Plume"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AcoudroiEnPlastique -->
+
+    <owl:Class rdf:about="#AcoudroiEnPlastique">
+        <rdfs:subClassOf rdf:resource="#Acoudoir"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#estBourreDe"/>
+                        <owl:someValuesFrom rdf:resource="#Bourrage"/>
+                    </owl:Restriction>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Plastique"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Aluminium -->
+
+    <owl:Class rdf:about="#Aluminium">
+        <rdfs:subClassOf rdf:resource="#Metal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Assise -->
+
+    <owl:Class rdf:about="#Assise">
+        <rdfs:subClassOf rdf:resource="#ComposantBourrable"/>
+        <rdfs:comment xml:lang="fr"
+            >Permet de repr&#233;senter une assise</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AssiseEnBois -->
+
+    <owl:Class rdf:about="#AssiseEnBois">
+        <rdfs:subClassOf rdf:resource="#Assise"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Bois"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AssiseEnCuir -->
+
+    <owl:Class rdf:about="#AssiseEnCuir">
+        <rdfs:subClassOf rdf:resource="#Assise"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Cuir"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estBourreDe"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Mousse"/>
+                            <rdf:Description rdf:about="#Plume"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AssiseEnPlastique -->
+
+    <owl:Class rdf:about="#AssiseEnPlastique">
+        <rdfs:subClassOf rdf:resource="#Assise"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Plastique"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#AssiseEnTissu -->
+
+    <owl:Class rdf:about="#AssiseEnTissu">
+        <rdfs:subClassOf rdf:resource="#Assise"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Tissu"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estBourreDe"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Mousse"/>
+                            <rdf:Description rdf:about="#Plume"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Bois -->
+
+    <owl:Class rdf:about="#Bois">
+        <rdfs:subClassOf rdf:resource="#Matiere"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Bois"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Bourrage -->
+
+    <owl:Class rdf:about="#Bourrage">
+        <rdfs:comment xml:lang="fr"
+            >Correspond aux diff&#233;rents type de bourrage disponible</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Canape -->
+
+    <owl:Class rdf:about="#Canape">
+        <rdfs:subClassOf rdf:resource="#Siege"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#nombrePlace"/>
+                <owl:someValuesFrom>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&rdfs;Datatype"/>
+                        <owl:onDatatype rdf:resource="&xsd;integer"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="&xsd;integer">2</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdf:Description>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#Dossier"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="fr"
+            >Canap&#233; contient un 1 dossier.
+Et a minimum 2 places.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#CanapeEnCuir -->
+
+    <owl:Class rdf:about="#CanapeEnCuir">
+        <rdfs:subClassOf rdf:resource="#Canape"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:complementOf>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="#inclut"/>
+                                <owl:someValuesFrom rdf:resource="#Acoudoir"/>
+                            </owl:Restriction>
+                        </owl:complementOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#inclut"/>
+                        <owl:someValuesFrom rdf:resource="#AcoudoirEnCuir"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:complementOf>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="#inclut"/>
+                                <owl:someValuesFrom rdf:resource="#Dossier"/>
+                            </owl:Restriction>
+                        </owl:complementOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#inclut"/>
+                        <owl:someValuesFrom rdf:resource="#DossierEnCuir"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:someValuesFrom rdf:resource="#AssiseEnCuir"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="#CanapeEnTissu"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#CanapeEnTissu -->
+
+    <owl:Class rdf:about="#CanapeEnTissu">
+        <rdfs:subClassOf rdf:resource="#Canape"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:complementOf>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="#inclut"/>
+                                <owl:someValuesFrom rdf:resource="#Acoudoir"/>
+                            </owl:Restriction>
+                        </owl:complementOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#inclut"/>
+                        <owl:someValuesFrom rdf:resource="#AcoudoirEnTissu"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:complementOf>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="#inclut"/>
+                                <owl:someValuesFrom rdf:resource="#Dossier"/>
+                            </owl:Restriction>
+                        </owl:complementOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#inclut"/>
+                        <owl:someValuesFrom rdf:resource="#DossierEnTissu"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:someValuesFrom rdf:resource="#AssiseEnTissu"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#ChaiseDeJardin -->
+
+    <owl:Class rdf:about="#ChaiseDeJardin">
+        <rdfs:subClassOf rdf:resource="#Siege"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#nombrePlace"/>
+                <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#AssiseEnPlastique"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#DossierEnPlastique"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#PiedEnPlastique"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">4</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#AcoudroiEnPlastique"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="fr"
+            >Chaise de jardin a un dossier, une assise et une deux acoudoirs en plastique. Elle poss&#232;de une place.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Composant -->
+
+    <owl:Class rdf:about="#Composant">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estColoreEn"/>
+                <owl:onClass rdf:resource="#Couleur"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:someValuesFrom rdf:resource="#Matiere"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="fr"
+            >Composants qui vont agir dans la cr&#233;ation d&#39;un si&#232;ge.
+Chaque composant a une couleur et une mati&#232;re donn&#233;e.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#ComposantBourrable -->
+
+    <owl:Class rdf:about="#ComposantBourrable">
+        <rdfs:subClassOf rdf:resource="#Composant"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estBourreDe"/>
+                <owl:onClass rdf:resource="#Bourrage"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="fr"
+            >Composant qui ont la possibilit&#233; d&#39;&#234;tre remplis de bourrage</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Couleur -->
+
+    <owl:Class rdf:about="#Couleur">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Blanc"/>
+                    <rdf:Description rdf:about="#Gris"/>
+                    <rdf:Description rdf:about="#Marron"/>
+                    <rdf:Description rdf:about="#Noir"/>
+                    <rdf:Description rdf:about="#Beige"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="fr"
+            >Repr&#233;sente les couleurs possibles pour les diff&#233;rents composants du si&#232;ge</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Cuir -->
+
+    <owl:Class rdf:about="#Cuir">
+        <rdfs:subClassOf rdf:resource="#Matiere"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#CuirPorc -->
+
+    <owl:Class rdf:about="#CuirPorc">
+        <rdfs:subClassOf rdf:resource="#Cuir"/>
+        <owl:disjointWith rdf:resource="#CuirVache"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#CuirVache -->
+
+    <owl:Class rdf:about="#CuirVache">
+        <rdfs:subClassOf rdf:resource="#Cuir"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Dossier -->
+
+    <owl:Class rdf:about="#Dossier">
+        <rdfs:subClassOf rdf:resource="#ComposantBourrable"/>
+        <rdfs:comment xml:lang="fr"
+            >Permet de repr&#233;senter un dossier</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#DossierEnBois -->
+
+    <owl:Class rdf:about="#DossierEnBois">
+        <rdfs:subClassOf rdf:resource="#Dossier"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Bois"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#DossierEnCuir -->
+
+    <owl:Class rdf:about="#DossierEnCuir">
+        <rdfs:subClassOf rdf:resource="#Dossier"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estBourreDe"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Mousse"/>
+                            <rdf:Description rdf:about="#Plume"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Cuir"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#DossierEnPlastique -->
+
+    <owl:Class rdf:about="#DossierEnPlastique">
+        <rdfs:subClassOf rdf:resource="#Dossier"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Plastique"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#DossierEnTissu -->
+
+    <owl:Class rdf:about="#DossierEnTissu">
+        <rdfs:subClassOf rdf:resource="#Dossier"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estBourreDe"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Mousse"/>
+                            <rdf:Description rdf:about="#Plume"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Tissu"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Matiere -->
+
+    <owl:Class rdf:about="#Matiere">
+        <rdfs:comment xml:lang="fr"
+            >Diff&#233;rentes mati&#232;res n&#233;cessaire &#224; la composition d&#39;un si&#232;ge</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Metal -->
+
+    <owl:Class rdf:about="#Metal">
+        <rdfs:subClassOf rdf:resource="#Matiere"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Mousse -->
+
+    <owl:Class rdf:about="#Mousse">
+        <rdfs:subClassOf rdf:resource="#Bourrage"/>
+        <owl:disjointWith rdf:resource="#Plume"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Or -->
+
+    <owl:Class rdf:about="#Or">
+        <rdfs:subClassOf rdf:resource="#Metal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Pied -->
+
+    <owl:Class rdf:about="#Pied">
+        <rdfs:subClassOf rdf:resource="#Composant"/>
+        <rdfs:comment xml:lang="fr"
+            >Permet de repr&#233;senter un pied</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#PiedEnBois -->
+
+    <owl:Class rdf:about="#PiedEnBois">
+        <rdfs:subClassOf rdf:resource="#Pied"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Bois"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#PiedEnMetal -->
+
+    <owl:Class rdf:about="#PiedEnMetal">
+        <rdfs:subClassOf rdf:resource="#Pied"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Metal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#PiedEnPlastique -->
+
+    <owl:Class rdf:about="#PiedEnPlastique">
+        <rdfs:subClassOf rdf:resource="#Pied"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#estEn"/>
+                <owl:allValuesFrom rdf:resource="#Plastique"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Plastique -->
+
+    <owl:Class rdf:about="#Plastique">
+        <rdfs:subClassOf rdf:resource="#Matiere"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Plume -->
+
+    <owl:Class rdf:about="#Plume">
+        <rdfs:subClassOf rdf:resource="#Bourrage"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Poly&#233;ther -->
+
+    <owl:Class rdf:about="#Poly&#233;ther">
+        <rdfs:subClassOf rdf:resource="#Mousse"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Siege -->
+
+    <owl:Class rdf:about="#Siege">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#nombrePlace"/>
+                <owl:someValuesFrom>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&rdfs;Datatype"/>
+                        <owl:onDatatype rdf:resource="&xsd;integer"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="&xsd;integer">0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdf:Description>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#Pied"/>
+                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#Acoudoir"/>
+                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#Assise"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#Dossier"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="fr"
+            >L&#39;objet si&#232;ge.
+Doit &#234;tre obligatoirement compos&#233; d&#39;une assise.
+Peut ne pas avoir de pieds.
+Peut &#234;tre compos&#233; d&#39;un dossier et de 1 ou plusieurs acoudoirs.
+Poss&#232;de un nombre de place</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Tabouret -->
+
+    <owl:Class rdf:about="#Tabouret">
+        <rdfs:subClassOf rdf:resource="#Siege"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#inclut"/>
+                        <owl:someValuesFrom rdf:resource="#Acoudoir"/>
+                    </owl:Restriction>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#nombrePlace"/>
+                <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#reposeSur"/>
+                        <owl:onClass rdf:resource="#Pied"/>
+                        <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">3</owl:minQualifiedCardinality>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#reposeSur"/>
+                        <owl:onClass rdf:resource="#Pied"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">4</owl:maxQualifiedCardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="fr"
+            >Un tabouret a entre 3 et 4 pieds.
+Il n&#39;a pas d&#39;acourdoir et poss&#232;de 1 place.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#TabouretDeBar -->
+
+    <owl:Class rdf:about="#TabouretDeBar">
+        <rdfs:subClassOf rdf:resource="#Tabouret"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#inclut"/>
+                <owl:onClass rdf:resource="#Dossier"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="#TabouretDeCuisine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#TabouretDeCuisine -->
+
+    <owl:Class rdf:about="#TabouretDeCuisine">
+        <rdfs:subClassOf rdf:resource="#Tabouret"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#inclut"/>
+                        <owl:someValuesFrom rdf:resource="#Dossier"/>
+                    </owl:Restriction>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Tissu -->
+
+    <owl:Class rdf:about="#Tissu">
+        <rdfs:subClassOf rdf:resource="#Matiere"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#polyethane -->
+
+    <owl:Class rdf:about="#polyethane">
+        <rdfs:subClassOf rdf:resource="#Mousse"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Beige -->
+
+    <owl:Thing rdf:about="#Beige">
+        <rdf:type rdf:resource="#Couleur"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Blanc -->
+
+    <owl:Thing rdf:about="#Blanc">
+        <rdf:type rdf:resource="#Couleur"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Gris -->
+
+    <Couleur rdf:about="#Gris">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </Couleur>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Marron -->
+
+    <owl:Thing rdf:about="#Marron">
+        <rdf:type rdf:resource="#Couleur"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#Noir -->
+
+    <owl:Thing rdf:about="#Noir">
+        <rdf:type rdf:resource="#Couleur"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#accoudoirJard1 -->
+
+    <owl:Thing rdf:about="#accoudoirJard1">
+        <rdf:type rdf:resource="#AcoudroiEnPlastique"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#accoudoirJard2 -->
+
+    <AcoudroiEnPlastique rdf:about="#accoudoirJard2">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </AcoudroiEnPlastique>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#assise32 -->
+
+    <owl:Thing rdf:about="#assise32">
+        <rdf:type rdf:resource="#Assise"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#assise87 -->
+
+    <owl:Thing rdf:about="#assise87">
+        <rdf:type rdf:resource="#Assise"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estIncluPar rdf:resource="#canape27"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#assise88 -->
+
+    <owl:Thing rdf:about="#assise88">
+        <rdf:type rdf:resource="#AssiseEnPlastique"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#assiseTab1 -->
+
+    <AssiseEnPlastique rdf:about="#assiseTab1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <estColoreEn rdf:resource="#Blanc"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </AssiseEnPlastique>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#canape27 -->
+
+    <Canape rdf:about="#canape27">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <nombrePlace rdf:datatype="&xsd;integer">2</nombrePlace>
+        <inclut rdf:resource="#assise87"/>
+        <inclut rdf:resource="#dossier14"/>
+        <reposeSur rdf:resource="#pied1"/>
+        <reposeSur rdf:resource="#pied2"/>
+    </Canape>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#chaise780 -->
+
+    <owl:Thing rdf:about="#chaise780">
+        <rdf:type rdf:resource="#ChaiseDeJardin"/>
+        <nombrePlace rdf:datatype="&xsd;integer">1</nombrePlace>
+        <inclut rdf:resource="#assise88"/>
+        <inclut rdf:resource="#dossier15"/>
+        <reposeSur rdf:resource="#piedJard1"/>
+        <reposeSur rdf:resource="#piedJard2"/>
+        <reposeSur rdf:resource="#piedJard3"/>
+        <reposeSur rdf:resource="#piedJard4"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#dossier14 -->
+
+    <Dossier rdf:about="#dossier14">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estIncluPar rdf:resource="#canape27"/>
+    </Dossier>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#dossier15 -->
+
+    <owl:Thing rdf:about="#dossier15">
+        <rdf:type rdf:resource="#DossierEnPlastique"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#or12 -->
+
+    <Or rdf:about="#or12">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </Or>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#pied1 -->
+
+    <owl:Thing rdf:about="#pied1">
+        <rdf:type rdf:resource="#Pied"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#pied2 -->
+
+    <owl:Thing rdf:about="#pied2">
+        <rdf:type rdf:resource="#Pied"/>
+        <supporte rdf:resource="#canape27"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#piedJard1 -->
+
+    <owl:Thing rdf:about="#piedJard1">
+        <rdf:type rdf:resource="#PiedEnPlastique"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#piedJard2 -->
+
+    <PiedEnPlastique rdf:about="#piedJard2">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </PiedEnPlastique>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#piedJard3 -->
+
+    <owl:Thing rdf:about="#piedJard3">
+        <rdf:type rdf:resource="#PiedEnPlastique"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#piedJard4 -->
+
+    <PiedEnPlastique rdf:about="#piedJard4">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <estColoreEn rdf:resource="#Marron"/>
+        <estEn rdf:resource="#plastiqueASASA"/>
+    </PiedEnPlastique>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#piedTab1 -->
+
+    <owl:Thing rdf:about="#piedTab1">
+        <estEn rdf:resource="#or12"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#piedTab2 -->
+
+    <owl:Thing rdf:about="#piedTab2">
+        <estColoreEn rdf:resource="#Blanc"/>
+        <estEn rdf:resource="#or12"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#piedTab3 -->
+
+    <owl:Thing rdf:about="#piedTab3">
+        <estColoreEn rdf:resource="#Blanc"/>
+        <estEn rdf:resource="#or12"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#plastiqueASASA -->
+
+    <Plastique rdf:about="#plastiqueASASA">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <estLaMatiereDe rdf:resource="#piedJard1"/>
+        <estLaMatiereDe rdf:resource="#piedJard2"/>
+        <estLaMatiereDe rdf:resource="#piedJard3"/>
+        <estLaMatiereDe rdf:resource="#piedJard4"/>
+    </Plastique>
+    
+
+
+    <!-- http://www.siege.org/ontologies/siege.owl#tabouret12 -->
+
+    <owl:Thing rdf:about="#tabouret12">
+        <rdf:type rdf:resource="#TabouretDeCuisine"/>
+        <nombrePlace rdf:datatype="&xsd;integer">1</nombrePlace>
+        <inclut rdf:resource="#assiseTab1"/>
+        <reposeSur rdf:resource="#piedTab1"/>
+        <reposeSur rdf:resource="#piedTab2"/>
+        <reposeSur rdf:resource="#piedTab3"/>
+    </owl:Thing>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Bourrage"/>
+            <rdf:Description rdf:about="#Composant"/>
+            <rdf:Description rdf:about="#Couleur"/>
+            <rdf:Description rdf:about="#Matiere"/>
+            <rdf:Description rdf:about="#Siege"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Bois"/>
+            <rdf:Description rdf:about="#Cuir"/>
+            <rdf:Description rdf:about="#Metal"/>
+            <rdf:Description rdf:about="#Plastique"/>
+            <rdf:Description rdf:about="#Tissu"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Blanc"/>
+            <rdf:Description rdf:about="#Gris"/>
+            <rdf:Description rdf:about="#Marron"/>
+            <rdf:Description rdf:about="#Noir"/>
+            <rdf:Description rdf:about="#Beige"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Acier"/>
+            <rdf:Description rdf:about="#Aluminium"/>
+            <rdf:Description rdf:about="#Or"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Canape"/>
+            <rdf:Description rdf:about="#ChaiseDeJardin"/>
+            <rdf:Description rdf:about="#Tabouret"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#dimension"/>
+            <rdf:Description rdf:about="#nom"/>
+            <rdf:Description rdf:about="#nombrePlace"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="#hauteur"/>
+            <rdf:Description rdf:about="#largeur"/>
+            <rdf:Description rdf:about="#longueur"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+

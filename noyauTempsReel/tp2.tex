@@ -1,0 +1,66 @@
+\documentclass[a4paper,12pt]{article} 
+\usepackage[T1]{fontenc}              
+\usepackage[frenchb]{babel} % césures, titres français
+\usepackage[utf8]{inputenc} % encodage
+\usepackage[a4paper,left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % marges
+\usepackage{graphicx} % insertion d'images
+\usepackage{rotating}
+\usepackage{float} % permet d'utiliser H pour placer un flottant obligatoirement
+\usepackage{pdfpages} % inclusion de PDF au sein du document
+\usepackage{listings}
+\pagestyle{plain} % pied de pages simples
+
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex} % espace entre les paragraphes
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+\lstset{% general command to set parameter(s)
+basicstyle=\ttfamily, % print whole listing small
+keywordstyle=\color{black}\bfseries\underbar,
+% underlined bold black keywords
+identifierstyle=, % nothing happens
+commentstyle=\color{white}, % white comments
+showstringspaces=false,
+numbers=left,
+language=java,
+breaklines=true,
+frame=tblr} % no special string spaces
+
+%%%% debut macro %%%%
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                           {-3.5ex \@plus -1ex \@minus -.2ex}%
+                           {2.3ex \@plus.2ex}%
+                           {\normalfont\Large\bfseries}}
+\makeatother
+%%%% fin macro %%%%
+
+
+
+% Def
+\newcommand{\code}[1]{{\lstinline{#1}}}
+
+\begin{document}
+\newpage
+\title{Noyau Temps Réel\\Travail préparatoire 2}
+\date{}
+\author{BRIZAI Olivier\\THORAVAL Maxime}
+\maketitle
+
+\section{Exercice 3}
+\subsubsection{Question 1 : Qu'est-ce qu'un timer ?} 
+Un timer est un périphérique matériel du MCU permettant de mesurer des durées. Nous pouvons le définir simplement comme un compteur.
+
+\subsubsection{Question 2 : Rappelez le principe de fonctionnement d'un timer}
+Toutes les n millisecond, le timer émet un tick. A chacun de ces derniers, l'ordonnanceur reprend la main afin de recalculer quelle tâche va s'exécuter jusqu'au prochain tick.
+
+\subsubsection{Question 3 : Inconvénients au fonctionnement en mode coopératif}
+Le mode coopératif peut entrainer un crash de l'application si celle-ci est mal programmée.
+De plus, deux tâches de même priorité ne pourront s'exécuter en même temps, la première à avoir la main fonctionnera jusqu'à ce qu'elle ait fini d'exécuter son code (ou qu'elle laisse, explicitement, la main). Cela revient à ce qu'elle ait une priorité plus élevée.
+
+\subsubsection{Question 4 : Avantages / Inconvénients au fonctionnement en mode préemptif}
+Le mode préemptif permet à deux tâches de même priorité de s'exécuter chacune leur tour, l'une n'aura aucun avantage sur l'autre. De même, on ne peut rester bloqué dans une tâche puisqu'à chaque tick l'ordonnanceur ne va pas nécessairement redonner la main à celle en cours d'exécution.
+Ce mode permet de supprimer l'aspect \og rendre la main \fg{} au développeur et augmente l'illusion de parallélisme des tâches.
+Cependant il est assez complexe à mettre en place et est parfois plus couteux de part les nombreux appels à l'ordonnanceur.
+
+\end{document}

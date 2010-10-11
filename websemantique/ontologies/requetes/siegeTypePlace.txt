@@ -1,0 +1,8 @@
+------------------------------------------------------------------------------------------------------------------------------------------
+| siege                                                       | type                                                          | nbPlaces |
+==========================================================================================================================================
+| <http://www.siege.org/ontologies/siege.owl#chaise780>       | <http://www.siege.org/ontologies/siege.owl#ChaiseDeJardin>    | 1        |
+| <http://www.siege.org/ontologies/siege.owl#canape27>        | <http://www.siege.org/ontologies/siege.owl#Canape>            | 2        |
+| <http://www.siege.org/ontologies/siege.owl#tabouret12>      | <http://www.siege.org/ontologies/siege.owl#TabouretDeCuisine> | 1        |
+| <http://www.siege.org/ontologies/siege.owl#canapeSansPlace> | <http://www.siege.org/ontologies/siege.owl#CanapeEnTissu>     |          |
+------------------------------------------------------------------------------------------------------------------------------------------
