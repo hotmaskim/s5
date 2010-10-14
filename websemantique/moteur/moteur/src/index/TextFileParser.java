@@ -25,9 +25,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+/**
+ * Classe permettant de récupérer les différents mots d'un fichier texte
+ * @author Maxime Thoraval & Olivier Brizai
+ *
+ */
 public class TextFileParser {
+	//Gestionnaire des stopword
 	StopWordManager _stopWord;
 	
+	/**
+	 * Constructeur chargeant le gestionnaire des stopword
+	 */
 	public TextFileParser() {
 		try {
 			_stopWord = new StopWordManager("../stopword.txt");
@@ -36,6 +45,13 @@ public class TextFileParser {
 		}
 	}
 	
+	/**
+	 * Méthode permettant de récupérer les liste des mots, ainsi que leur occurence au sein d'un fichier
+	 * Tout en prenant en compte les stopword
+	 * @param fichier Le fichier à examiner
+	 * @return Une hashmap dont la clé est le mot et l'objet le nombre d'occurences
+	 * @throws IOException
+	 */
 	public HashMap<String, Double> getMots(String fichier) throws IOException{
 		HashMap<String, Double> mots = new HashMap<String, Double> ();
 		

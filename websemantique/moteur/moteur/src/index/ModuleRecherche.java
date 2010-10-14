@@ -22,18 +22,32 @@ import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.Vector;
 
+/**
+ * Classe permettant d'effectuer des recherches
+ * @author Brizai Olivier & Maxime Thoraval
+ *
+ */
 public class ModuleRecherche {
 
 		Index _index;
 		TreeMap<Double,String> _coeffSalton;
 		String[] _documents;
 	
+		/**
+		 * Constructeur
+		 * @param index Index crée
+		 * @param documents Liste des documents indexés
+		 */
 		public ModuleRecherche(Index index, String[] documents) {
 			_index = index;
 			_documents = documents;
 			_coeffSalton =  new TreeMap<Double,String>();
 		}
 		
+		/**
+		 * Méthode effectuant la recherche
+		 * @param requete La liste des mots à rechercher
+		 */
 		public void recherche(Vector<String> requete){
 			
 			//on recup√®re les coeff de Salton aupr√®s de l'index

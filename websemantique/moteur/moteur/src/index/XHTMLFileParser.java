@@ -10,15 +10,29 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+/**
+ * Classe permettant de parser un fichier XML et de récupérer la liste des mots
+ * @author Brizai Olivier & Maxime Thoraval
+ *
+ */
 public class XHTMLFileParser implements ContentHandler {
 	
 	private HashMap<String, Double> _mots;
 	
+	/**
+	 * Constructeur par défaut
+	 */
 	public XHTMLFileParser(){
 		 super();
 		 _mots = new HashMap<String, Double> ();
 	}
 
+	/**
+	 * Retourne la liste des mots d'un fichier avec leur occurence
+	 * @param fichier Le fichier dont on veut retourner les mots
+	 * @return une hashmap contenant la liste des mots en clé, et leur nombre d'occurences en objet
+	 * @throws IOException
+	 */
 	public HashMap<String, Double> getMots(String fichier)  throws IOException{
 		return _mots;	
 	}

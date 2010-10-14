@@ -19,6 +19,7 @@
 package index;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -28,7 +29,12 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-public class Index {
+/**
+ * Classe représenttant l'index
+ * @author Maxime Thoraval & Olivier Brizai
+ *
+ */
+public class Index implements Serializable{
 	private HashMap<String, HashMap<String, Double>> _index;
 	
 	/**
