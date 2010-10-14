@@ -49,20 +49,34 @@ frame=tblr} % no special string spaces
 
 \newpage
 \section{Introduction}
-Dans ce TP nous nous sommes intéressé à la mise en place d'une méthode d'indexation. La méthode d'indexation utilisée ici est fondée sur la facteur TF-IDF et le coefficient de Salton.
+Dans ce TP nous nous sommes intéressés à la mise en place d'une méthode d'indexation. La méthode d'indexation utilisée ici est fondée sur le facteur TF-IDF et le coefficient de Salton.
 
-Le coefficicient TF-IDF permet de pondérer un mot dans le document auquel il appartient. Ce coefficient ne dépend pas seulement du nombre d'apparition du mot dans le document en question mais également de
-son apparition dans les autres documents. Une des propriétées remarquable de ce coefficient est donc justement de devenir très faible pour un mot donné, dans un index donné, si celui-ci est équi-réparti dans les documents de l'index. L'intérêt est alors de faire "disparaître" les mots très fréquemmentd utilisées dans les phrases comme des pronoms personnels, conjonction de coordination, de subordination ...
+Le coefficicient TF-IDF permet de pondérer un mot dans le document auquel il appartient. Ce coefficient ne dépend pas seulement du nombre d'apparition du mot dans le document en question, mais également de
+son apparition dans les autres documents. Une des propriétés remarquable de ce coefficient est donc justement de devenir très faible pour un mot donné, dans un index donné, si celui-ci est équi-réparti dans les documents de l'index. L'intérêt est alors de faire "disparaître" les mots très fréquemment utilisés dans les phrases comme ;  des pronoms personnels, conjonction de coordination, de subordination ...
 
-Le coefficient de Salton permet quant à lui de classer les documents d'un index par pertinence lors d'une requête. Il se base pour cela sur une méthode dite vectorielle. L'objectif étant de calculer la "distance" d'une requete à chaque document de l'index et de classer ensuite les documents suivant cette distance. Le document le plus "proche" de la requete étant alors le plus pertinant. Plusieurs méthode du calcul de cette distance sont envisageables.
+Le coefficient de Salton permet quant à lui de classer les documents d'un index par pertinence lors d'une requête. Il se base pour cela sur une méthode dite vectorielle. L'objectif étant de calculer la "distance" d'une requête à chaque document de l'index et de classer ensuite les documents suivant cette distance. Le document le plus "proche" de la requête étant alors le plus pertinant. Plusieurs méthodes du calcul de cette distance sont envisageables.
 
 \section{Choix de la structure}
 
+Dans notre recdherche de la strcuture à utiliser, nous somme passés par plusieurs choix, et nous avons du revenir en arrière à plusieurs reprises.
 
+Le premier choix était une structure de type : 
 
-\section{La phase d'indexation}
+Hashmap< mot , Hashmap< document , pondération >  >
 
-\section{la phase de recherche}
+Lors de la phase d'indexation, ce choix est idéale puisque la complexité pour calculer la pondération TF-IDF est très bonne.
+C'est au moment d'implémenter la phase de recherche dans l'index que nous sommes revenu sur cette structure. En effet avec une telle structure la complexité de la recherche dans l'index est très mauvaise.
+Cela est du à la façon dont sont calculés les coeffcients de Salton.
+
+La seconde structure que nous pouvions alors utiliser pour réduire le temps de recherche était : 
+
+Hashmap< document , Hashmap< mot, pondération >  >
+
+Cette solution réduit le temps de recherche mais c'est alors le temps d'indexation qui augmente.
+
+Nous avons alors du faire un choix. Une possibilité aurait été de choisir les 2 structures à la fois. Cela aurait eu certes pour effet de doubler l'espace mémoire, mais on gagnait une puissance de N au niveau de la complexité.
+Afin de ne pas trop nous écarter du sujet, nous avons donc tranché entre une des deux options et avons choisi la seconde. Notre choix a été orienté par la prise compte du fait qu'un utilisateur
+ne doit pas attendre longtemps avant d'obtenir une réponse à sa requête. On pourra toujours lancer la phase d'indexation périodiquement. Dans la réalité les moteurs de recherche ne fonctionnent de toute façon pas de cette façon mais ce problème nous aura au moins fait prendre concience des problèmes à grande échelle.
 
 \section{Améliorations et extensions}
 
