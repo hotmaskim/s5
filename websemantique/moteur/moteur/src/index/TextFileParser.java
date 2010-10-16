@@ -18,6 +18,7 @@
 
 package index;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 
 /**
- * Classe permettant de rŽcupŽrer les diffŽrents mots d'un fichier texte
+ * Classe permettant de rï¿½cupï¿½rer les diffï¿½rents mots d'un fichier texte
  * @author Maxime Thoraval & Olivier Brizai
  *
  */
@@ -46,10 +47,10 @@ public class TextFileParser {
 	}
 	
 	/**
-	 * MŽthode permettant de rŽcupŽrer les liste des mots, ainsi que leur occurence au sein d'un fichier
+	 * Mï¿½thode permettant de rï¿½cupï¿½rer les liste des mots, ainsi que leur occurence au sein d'un fichier
 	 * Tout en prenant en compte les stopword
-	 * @param fichier Le fichier ˆ examiner
-	 * @return Une hashmap dont la clŽ est le mot et l'objet le nombre d'occurences
+	 * @param fichier Le fichier ï¿½ examiner
+	 * @return Une hashmap dont la clï¿½ est le mot et l'objet le nombre d'occurences
 	 * @throws IOException
 	 */
 	public HashMap<String, Double> getMots(String fichier) throws IOException{

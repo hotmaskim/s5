@@ -19,6 +19,7 @@
 package index;
 
 
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import org.xml.sax.SAXException;
 /**
  * Classe principale
  * Lance un menu permettant: 
- * 		- d'indiquer la liste des fichier ˆ indexer
+ * 		- d'indiquer la liste des fichier ï¿½ indexer
  * 		- ouvrir un index
  * 		- effectuer une recherche
  * 		- Enregistrer l'index
@@ -54,9 +55,9 @@ public class Main {
 			try {
 				
 				if(index != null)
-					System.out.println("\n[Index prŽsent]");
+					System.out.println("\n[Index prï¿½sent]");
 				else
-					System.out.println("\n[Aucun index, crŽez ou chargez en un]");
+					System.out.println("\n[Aucun index, crï¿½ez ou chargez en un]");
 				System.out.println("Que souhaitez-vous faire ?");
 				System.out.print("C)reer index\tO)uvrir index");
 				if(index !=null)
@@ -66,25 +67,25 @@ public class Main {
 
 				switch (choix) {
 				case 'c':
-					System.out.print("Fichiers ˆ indexer sŽparŽs par espace (10 textes prŽsent par dŽfaut) : ");
-					sc.nextLine(); //Pour supprimer le "retour" de la sŽlection du menu
+					System.out.print("Fichiers ï¿½ indexer sï¿½parï¿½s par espace (10 textes prï¿½sent par dï¿½faut) : ");
+					sc.nextLine(); //Pour supprimer le "retour" de la sï¿½lection du menu
 					creerIndex(sc.nextLine());
-					System.out.println("Index crŽe ! \n");
+					System.out.println("Index crï¿½e ! \n");
 					break;
 					
 				case 'o':
-					System.out.print("Nom index (index.in par dŽfaut) : ");
-					sc.nextLine(); //Pour supprimer le "retour" de la sŽlection du menu
+					System.out.print("Nom index (index.in par dï¿½faut) : ");
+					sc.nextLine(); //Pour supprimer le "retour" de la sï¿½lection du menu
 					chargerIndex(sc.nextLine());
 					//index = chargerIndex();
-					System.out.println("Index chargŽ ! \n");
+					System.out.println("Index chargï¿½ ! \n");
 					break;
 					
 				case 'e':
-					System.out.print("Chemin du fichier (index.in par dŽfaut) : ");
-					sc.nextLine(); //Pour supprimer le "retour" de la sŽlection du menu
+					System.out.print("Chemin du fichier (index.in par dï¿½faut) : ");
+					sc.nextLine(); //Pour supprimer le "retour" de la sï¿½lection du menu
 					saveIndex(sc.nextLine());
-					System.out.println("Index sauvŽ ! \n");
+					System.out.println("Index sauvï¿½ ! \n");
 					
 					break;
 				case 'r':
@@ -92,12 +93,12 @@ public class Main {
 						if(index != null)
 							moduleRecherche = new ModuleRecherche(index, args);
 						else {
-							System.out.println("CrŽez ou ouvrez un index !\n");
+							System.out.println("Crï¿½ez ou ouvrez un index !\n");
 							break;
 						}
 					}
 
-					System.out.print("Mots ˆ rechercher : ");
+					System.out.print("Mots ï¿½ rechercher : ");
 					sc.nextLine();
 					rechercher(sc.nextLine());
 
@@ -117,8 +118,8 @@ public class Main {
 	}
 
 	/**
-	 * MŽthode pour initialiser l'index
-	 * @param f La liste des fichiers (sŽparŽs par un espace) ˆ indexŽ. Si pas de valeur, prend dans le corpus  La Fontaine
+	 * Mï¿½thode pour initialiser l'index
+	 * @param f La liste des fichiers (sï¿½parï¿½s par un espace) ï¿½ indexï¿½. Si pas de valeur, prend dans le corpus  La Fontaine
 	 * @throws SAXException
 	 * @throws IOException
 	 */
@@ -135,7 +136,7 @@ public class Main {
 	}
 
 	/**
-	 * MŽthode permettant d'effectuer une recherche
+	 * Mï¿½thode permettant d'effectuer une recherche
 	 * @param recherches
 	 */
 	private static void rechercher(String recherches){
@@ -147,7 +148,7 @@ public class Main {
 	}
 
 	/**
-	 * MŽthode permettant de sauvegarder l'index
+	 * Mï¿½thode permettant de sauvegarder l'index
 	 * @param url Chemin du fichier ou sauvegarder l'index
 	 * @throws IOException
 	 */
@@ -162,7 +163,7 @@ public class Main {
 	}
 
 	/**
-	 * MŽthode permettant de charger un index (si pas de valeur, va chercher fichier 'index.in'
+	 * Mï¿½thode permettant de charger un index (si pas de valeur, va chercher fichier 'index.in'
 	 * @param url Chemin du fichier contenant l'index
 	 * @throws IOException
 	 * @throws ClassNotFoundException

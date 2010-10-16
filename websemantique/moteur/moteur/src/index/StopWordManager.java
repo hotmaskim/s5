@@ -1,3 +1,21 @@
+/**
+ * ENSICAEN
+ * 6 Boulevard Marechal Juin 
+ * F-14050 Caen Cedex 
+ * 
+ * This file is owned by ENSICAEN students.
+ * No portion of this document may be reproduced, copied
+ * or revised without written permission of the authors.
+ */ 
+
+/**
+ * @author Olivier Brizai <olivier.brizai@ecole.ensicaen.fr>
+ * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
+ * 
+ * @file StopWordManager.java
+ * @brief Classe permettant de gï¿½rer une liste de stopword
+*/
+
 package index;
 
 import java.io.BufferedReader;
@@ -6,17 +24,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Classe permettant de gŽrer une liste de stopword
- * @author Brizai Olivier & Maxime Thoraval
- *
- */
 public class StopWordManager {
 	//Tableau des stopword
 	ArrayList<String> _stopWord;
 	
 	/**
-	 * Constructeur par dŽfaut
+	 * Constructeur par dï¿½faut
 	 * @param fichier Fichier contenant la liste des stopword
 	 * @throws IOException
 	 */
@@ -31,9 +44,9 @@ public class StopWordManager {
 	}
 	
 	/**
-	 * Test si un mot est prŽsent dans la liste des stopword
-	 * @param mot Le mot dont il faut vŽrifier la prŽsence
-	 * @return vrai s'il est prŽsent, faux sinon
+	 * Test si un mot est prï¿½sent dans la liste des stopword
+	 * @param mot Le mot dont il faut vï¿½rifier la prï¿½sence
+	 * @return vrai s'il est prï¿½sent, faux sinon
 	 */
 	public boolean contains(String mot){
 		return _stopWord.contains(mot);

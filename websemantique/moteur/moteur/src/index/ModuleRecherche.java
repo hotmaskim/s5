@@ -18,6 +18,7 @@
 
 package index;
 
+
 import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -35,8 +36,8 @@ public class ModuleRecherche {
 	
 		/**
 		 * Constructeur
-		 * @param index Index crŽe
-		 * @param documents Liste des documents indexŽs
+		 * @param index Index crï¿½e
+		 * @param documents Liste des documents indexï¿½s
 		 */
 		public ModuleRecherche(Index index, String[] documents) {
 			_index = index;
@@ -45,8 +46,8 @@ public class ModuleRecherche {
 		}
 		
 		/**
-		 * MŽthode effectuant la recherche
-		 * @param requete La liste des mots ˆ rechercher
+		 * Mï¿½thode effectuant la recherche
+		 * @param requete La liste des mots ï¿½ rechercher
 		 */
 		public void recherche(Vector<String> requete){
 			

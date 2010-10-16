@@ -1,3 +1,21 @@
+/**
+ * ENSICAEN
+ * 6 Boulevard Marechal Juin 
+ * F-14050 Caen Cedex 
+ * 
+ * This file is owned by ENSICAEN students.
+ * No portion of this document may be reproduced, copied
+ * or revised without written permission of the authors.
+ */ 
+
+/**
+ * @author Olivier Brizai <olivier.brizai@ecole.ensicaen.fr>
+ * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
+ * 
+ * @file XHTMLFileParser.java
+ * @brief Classe permettant de rï¿½cupï¿½rer les mots dans un document XML
+ */
+
 package index;
 
 
@@ -10,17 +28,12 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-/**
- * Classe permettant de parser un fichier XML et de rŽcupŽrer la liste des mots
- * @author Brizai Olivier & Maxime Thoraval
- *
- */
 public class XHTMLFileParser implements ContentHandler {
 	
 	private HashMap<String, Double> _mots;
 	
 	/**
-	 * Constructeur par dŽfaut
+	 * Constructeur par defaut
 	 */
 	public XHTMLFileParser(){
 		 super();
@@ -30,7 +43,7 @@ public class XHTMLFileParser implements ContentHandler {
 	/**
 	 * Retourne la liste des mots d'un fichier avec leur occurence
 	 * @param fichier Le fichier dont on veut retourner les mots
-	 * @return une hashmap contenant la liste des mots en clŽ, et leur nombre d'occurences en objet
+	 * @return une hashmap contenant la liste des mots en clï¿½, et leur nombre d'occurences en objet
 	 * @throws IOException
 	 */
 	public HashMap<String, Double> getMots(String fichier)  throws IOException{

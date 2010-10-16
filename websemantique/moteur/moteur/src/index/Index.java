@@ -18,6 +18,7 @@
 
 package index;
 
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
- * Classe reprŽsenttant l'index
+ * Classe reprï¿½senttant l'index
  * @author Maxime Thoraval & Olivier Brizai
  *
  */
