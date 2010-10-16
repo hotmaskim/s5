@@ -58,7 +58,7 @@ Le coefficient de Salton permet quant à lui de classer les documents d'un index
 
 \section{Choix de la structure}
 
-Dans notre recherche de la structure à utiliser, nous somme passés par plusieurs choix et avons du revenir en arrière à plusieurs reprises.
+Dans notre recherche de la structure à utiliser, nous sommes passés par plusieurs choix et avons du revenir en arrière à plusieurs reprises.
 
 Le premier choix était une structure de type : 
 
@@ -101,7 +101,7 @@ Pour cela, nous nous sommes procuré une liste de \og stop-word \fg{}. Nous avon
 
 \subsection{Stockage de l'index}
 
-Lorsque l'index est généré, il peut être intéressant de le conserver afin d'éviter de tout recalculer à chaque lancement de l'application/serveur. Pour effectuer ceci, nous avons simplement utiliser l'interface \textit{Seralizable} de Java. Celle-ci nous permet de sauvegarder (et charger) directement un objet sans avoir à se soucier du formatage. Il y a cependant un désavantage lié à la réutilisation des données sauvées. En effet, nous avons enregistré un objet particulier à un instant t, si dans le cours du temps nous modifions sa classe, nous ne pourrons charger les informations puisque ne prenant pas en compte ces modifications. La solution serait de garder toutes les versions des classes que nous avons généré.
+Lorsque l'index est généré, il peut être intéressant de le conserver afin d'éviter de tout recalculer à chaque lancement de l'application/serveur. Pour effectuer ceci, nous avons simplement utilisé l'interface \textit{Seralizable} de Java. Celle-ci nous permet de sauvegarder (et charger) directement un objet sans avoir à se soucier du formatage. Il y a cependant un désavantage lié à la réutilisation des données sauvées. En effet, nous avons enregistré un objet particulier à un instant t, si dans le cours du temps nous modifions sa classe, nous ne pourrons charger les informations puisque ne prenant pas en compte ces modifications. La solution serait de garder toutes les versions des classes que nous avons généré.
 
 Dans le cas de notre TP, nous n'avons pas réellement besoin de nous soucier de ce problème.
 
@@ -109,7 +109,7 @@ Dans le cas de notre TP, nous n'avons pas réellement besoin de nous soucier de 
 
 Réaliser une pondération plus fine des mots d'une requête est une des améliorations que nous avons souhaité rajouter au moteur de recherche. Ceci a un sens si l'on
 considère que l'utilisateur va mettre les mots qu'il considère comme les plus importants en premier. La première idée pour réaliser cela était de diminuer de façon linéaire le poids de chaque mot de la requête.
-Mais un des inconvénients de cette méthode est qu'au bout d'un certain nombre mots, les mots restants auront un poids nul et ne compteront donc plus dans le requête. Si un mot est présent dans la requête mais que tous ceux que le précèdent n'apparaissent pas dans les recherches, ce dernier a tout de même droit à sa chance.
+Mais un des inconvénients de cette méthode est qu'au bout d'un certain nombre mots, les mots restants auront un poids nul et ne compteront donc plus dans le requête. Si un mot est présent dans la requête mais que tous ceux qui le précèdent n'apparaissent pas dans les recherches, ce dernier a tout de même droit à sa chance.
 
 Pour remédier à cela, on a utilisé une fonction qui converge vers 0 à l'infini. Ainsi le coefficient décroit en permanence sans atteindre zéro (sauf arrondissement inévitable au bout d'un certain temps).
 Cette fonction a également un autre intérêt. Doit-on en effet considérer que le passage du 1er au 2nd mot est aussi important que le passage du 7ème au 8ème dans la recherche ? Nous avons pensé qu'il pouvait-être
