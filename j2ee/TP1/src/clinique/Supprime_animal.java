@@ -1,4 +1,4 @@
-package cinema;
+package clinique;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Supprime_film
+ * Servlet implémentant la suppression de l'animal sélectionné
  */
 public class Supprime_animal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private GestionBDD bdd;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public Supprime_animal() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
-	public void init( ServletConfig config ) throws ServletException
+
+    /**
+     * Initialisation du gestionnaire de base de données
+     */
+    public void init( ServletConfig config ) throws ServletException
 	{
 		super.init( config );
 
@@ -32,24 +33,32 @@ public class Supprime_animal extends HttpServlet {
 		
 	}
 	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * Suppression de l'animal et affichage d'un message de confirmation de suppression
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// Test si l'utilisateur est bien authentifié
+		if(request.getSession().getAttribute("log")== null || !request.getSession().getAttribute("log").equals("true"))
+		      response.sendRedirect("connexion.html");
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
+		
+		//Récupération du numéro de l'animal à supprimer
 		String numAnimal = request.getParameter("animaux");
 		try {
-		bdd.supprimer("DELETE FROM mesanimaux WHERE idani = '" + numAnimal + "'");
+			//Suppression de l'animal
+			bdd.supprimer(numAnimal);
 		} catch (SQLException ex){
 			ex.printStackTrace();
 		}
+		//Affichage du message de confirmation
 		out.println("<HTML>");
 		out.println("<HEAD><TITLE>Animal supprimé</TITLE></HEAD>");
 		out.println("<BODY>");
-		out.println("Animal supprimé !");                                                                                                                                                                                                                                             
+		out.println("<center>Animal supprimé !</center><br />");
+		out.println("<a href='/TP1/Accueil'>Retour</a>");
 		out.println("</BODY>");
 	}
 
@@ -57,10 +66,9 @@ public class Supprime_animal extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
-
+	//Fermeture de la connexion à la base de données
 	public void destroy()  // Garantir que la connexion est bien ferm?e avant la fin du servlet
 	{
 		try { 

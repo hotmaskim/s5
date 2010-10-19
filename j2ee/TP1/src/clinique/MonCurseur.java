@@ -1,4 +1,4 @@
-package cinema;
+package clinique;
 
 import java.io.*;
 import java.sql.*;

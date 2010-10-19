@@ -2,12 +2,12 @@
 <web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<display-name>TP1</display-name>
 	<welcome-file-list>
-		<welcome-file>saisie_deb_animal.html</welcome-file>
+		<welcome-file>Accueil</welcome-file>
 	</welcome-file-list>
 	<!-- Servlet Formulaire -->
 	<servlet>
 		<servlet-name>Servlet1</servlet-name>
-		<servlet-class>cinema.Servlet1</servlet-class>
+		<servlet-class>clinique.Servlet1</servlet-class>
 	</servlet>
 	<servlet>
 		<description>
@@ -15,7 +15,7 @@
 		<display-name>Choix_animal</display-name>
 		<servlet-name>Choix_animal</servlet-name>
 		<servlet-class>
-		cinema.Choix_animal</servlet-class>
+		clinique.Choix_animal</servlet-class>
 	</servlet>
 	<servlet>
 		<description>
@@ -23,7 +23,23 @@
 		<display-name>Supprime_animal</display-name>
 		<servlet-name>Supprime_animal</servlet-name>
 		<servlet-class>
-		cinema.Supprime_animal</servlet-class>
+		clinique.Supprime_animal</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Connexion</display-name>
+		<servlet-name>Connexion</servlet-name>
+		<servlet-class>
+		clinique.Connexion</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Accueil</display-name>
+		<servlet-name>Accueil</servlet-name>
+		<servlet-class>
+		clinique.Accueil</servlet-class>
 	</servlet>
 	<!-- mapping ServletFormulaire -->
 	<servlet-mapping>
@@ -37,5 +53,13 @@
 	<servlet-mapping>
 		<servlet-name>Supprime_animal</servlet-name>
 		<url-pattern>/Supprime_animal</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Connexion</servlet-name>
+		<url-pattern>/Connexion</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Accueil</servlet-name>
+		<url-pattern>/Accueil</url-pattern>
 	</servlet-mapping>
 </web-app>

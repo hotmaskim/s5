@@ -1,4 +1,4 @@
-package cinema;
+package clinique;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
