@@ -12,8 +12,8 @@
  * @author Olivier Brizai <olivier.brizai@ecole.ensicaen.fr>
  * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
  * 
- * @file TestDao.java
- * @brief Classe 
+ * @file TestService.java
+ * @brief Class
  */
 
 package ensicaen.tb.mvc.eleves.tests;
@@ -24,25 +24,27 @@ import java.util.Date;
 import ensicaen.tb.mvc.eleves.dao.DAOException;
 import ensicaen.tb.mvc.eleves.dao.DAOImpl;
 import ensicaen.tb.mvc.eleves.entities.Eleve;
+import ensicaen.tb.mvc.eleves.service.IServiceImpl;
 import junit.framework.TestCase;
 
-
-public class TestDao extends TestCase{
+public class TestService extends TestCase{
 
 	private DAOImpl dao;
+	private IServiceImpl service;
 
-	public TestDao() {
+	public TestService() {
 		dao = new DAOImpl();
 		dao.init();
+		service.setDAO(dao);
 	}
 
 	/**
-	 * Test les méthodes de la classe DaoImpl
+	 * Test les méthodes de la classe IServiceImpl
 	 */
 
 	public void test1(){
 		//affichage de la liste des eleves
-		ArrayList<Eleve> eleves = (ArrayList<Eleve>)dao.getAll();
+		ArrayList<Eleve> eleves = (ArrayList<Eleve>)service.getAll();
 		for (Eleve eleve : eleves) {
 			System.out.println(eleve.toString());
 		}
@@ -50,23 +52,23 @@ public class TestDao extends TestCase{
 		//ajout d'un eleve dans la table + 
 		//recherche d'un eleve
 		Eleve e = new Eleve("Dupont", "Henry", new Date(81, 10, 12), false, 1, "INFO");
-		dao.saveOne(e);
-		Eleve e2 = dao.getOne(e.getId());
+		service.saveOne(e);
+		Eleve e2 = service.getOne(e.getId());
 		assertEquals(true, e.equals(e2));
 
 		//affichage d'un eleve
-		System.out.println(dao.getOne(e.getId()).toString());
+		System.out.println(service.getOne(e.getId()).toString());
 
 		//modifie les caracteristiques d'un eleves
 		e.setNom("UpdatedDupond");
-		dao.saveOne(e);
-		e = dao.getOne(e.getId());
+		service.saveOne(e);
+		e = service.getOne(e.getId());
 		assertEquals("UpdatedDupond", e.getNom());
 		
 		//supprime un eleve
 		try{
-			dao.deleteOne(e.getId());
-			dao.getOne(e.getId());
+			service.deleteOne(e.getId());
+			service.getOne(e.getId());
 		}catch (DAOException ex) {
 			assertEquals(31, ex.getCode());
 		}
@@ -75,9 +77,9 @@ public class TestDao extends TestCase{
 	public void test2(){
 		//Modification d'un élève inexistant
 		try {
-			Eleve e = dao.getOne(-1);
+			Eleve e = service.getOne(-1);
 			e.setNom("Test");
-			dao.saveOne(e);
+			service.saveOne(e);
 		} catch(DAOException ex){
 			//Test d'impossibilité de récupération de l'élève
 			assertEquals(31, ex.getCode());
@@ -86,7 +88,7 @@ public class TestDao extends TestCase{
 		Eleve e = new Eleve("Dupont", "Henry", new Date(81, 10, 12), false, 1, "INFO");
 		//Suppression d'un élève inexistant
 		try {
-			dao.deleteOne(e.getId());
+			service.deleteOne(e.getId());
 		} catch(DAOException ex){
 			assertEquals(50, ex.getCode());
 		}
@@ -94,29 +96,29 @@ public class TestDao extends TestCase{
 
 	public void test3(){
 		Eleve e = new Eleve("Dupont", "Henry", new Date(81, 10, 12), false, 1, "INFO");
-		dao.saveOne(e);
+		service.saveOne(e);
 		
-		Eleve e1 = dao.getOne(e.getId());
-		Eleve e2 = dao.getOne(e.getId());
+		Eleve e1 = service.getOne(e.getId());
+		Eleve e2 = service.getOne(e.getId());
 		
 		e1.setNom("UpdatedDupont");
-		dao.saveOne(e1);
+		service.saveOne(e1);
 		
 		// Problème de synchronisation lors de la mise à jour
 		try{
-			dao.saveOne(e2);
+			service.saveOne(e2);
 		} catch (DAOException ex) {
 			assertEquals(43, ex.getCode());
 		}
 		
-		dao.deleteOne(e1.getId());
+		service.deleteOne(e1.getId());
 	}
 
 	public void test4(){
 		Eleve e = new Eleve("", "Henry", new Date(81, 10, 12), false, 1, "ELEC");
 
 		try{
-			dao.saveOne(e);
+			service.saveOne(e);
 		} catch (DAOException ex) {
 			assertEquals(40, ex.getCode());
 		}

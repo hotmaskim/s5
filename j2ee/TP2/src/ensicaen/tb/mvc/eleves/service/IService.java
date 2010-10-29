@@ -12,19 +12,18 @@
  * @author Olivier Brizai <olivier.brizai@ecole.ensicaen.fr>
  * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
  * 
- * @file IDAO.java
- * @brief Interface de la couche DAO, faisant le lien entre le DAO et la couche des services
+ * @file IService.java
+ * @brief Interface
  */
 
-package ensicaen.tb.mvc.eleves.dao;
+package ensicaen.tb.mvc.eleves.service;
 
 import java.util.Collection;
-
 import ensicaen.tb.mvc.eleves.entities.Eleve;
 
-public interface IDAO {
-	
-	Collection<Eleve> getAll();
+public interface IService {
+
+	Collection <Eleve> getAll();
 	Eleve getOne(int id);
 	void saveOne(Eleve e);
 	void deleteOne(int id);

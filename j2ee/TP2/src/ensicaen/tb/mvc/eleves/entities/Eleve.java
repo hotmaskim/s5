@@ -19,6 +19,11 @@ public class Eleve implements Serializable {
 	public Eleve(){
 	}
 	
+	public Eleve(String nom, String prenom,
+			Date dateNaissance, boolean redoublant, int annee, String filiere) {
+		this(-1, 1, nom, prenom, dateNaissance, redoublant, annee, filiere);
+	}
+	
 	public Eleve(int id, int version, String nom, String prenom,
 			Date dateNaissance, boolean redoublant, int annee, String filiere) {
 		this.id = id;
@@ -105,6 +110,15 @@ public class Eleve implements Serializable {
 		retour += "\nFilière : " + filiere;
 		
 		return retour;
+	}
+	
+	public boolean equals(Object obj) {
+		Eleve comp = (Eleve)obj;
+		if(comp.getId() == this.id && comp.getVersion() == this.version && comp.getNom().equals(this.nom)
+				&& comp.getPrenom().equals(this.prenom) && comp.isRedoublant()== this.redoublant
+				&& comp.getDateNaissance().equals(this.dateNaissance) && comp.getFiliere().equals(this.filiere))
+			return true;
+		return false;
 	}
 	
 }
