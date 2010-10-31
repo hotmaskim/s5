@@ -43,26 +43,33 @@ public class DAOImpl implements IDAO  {
 	private static String DELETE_ONE_ELEVE = "DELETE FROM ELEVES WHERE id = ?";
 	private static String GET_CURRENT_SEQVAL = "SELECT CURRVAL('SEQ_ELEVES')";
 	private static String GET_VERSION_ELEVE = "SELECT version FROM eleves WHERE id = ?";
-
+	
 	public DAOImpl() {
 	}
+
+	/**
+	* Initialisation du DAO : Chargement du driver postgresql, connection à la bdd et préparation des statements
+	*/
 
 	public void init() {
 		String url ="jdbc:postgresql://postgres.ecole.ensicaen.fr/clinique?user=thoraval&password=canari" ;
 
 		try {
+			//Chargement du driver postgresql
 			try {
 				Class.forName("org.postgresql.Driver").newInstance();
 			} catch (Exception e) {
 				throw new DAOException("Impossible de charger le driver\n" + e.getMessage(), 10);
 			}	
-
+			
+			//Connection à la base de données
 			try {
 				cnx = DriverManager.getConnection (url);
 			} catch(SQLException ex) {
 				throw new DAOException("Problème lors de la récupération du driver\n" + ex.getMessage(), 11);
 			}
-
+			
+			//Préparation des statements
 			try {
 				st1 = cnx.prepareStatement(GET_ONE_ELEVE);
 				st2 = cnx.prepareStatement(SAVE_ONE_ELEVE);
@@ -79,6 +86,10 @@ public class DAOImpl implements IDAO  {
 		}
 	}
 
+	/**
+	* Fermeture de la connection avec la base de données
+	*/
+
 	public void destroy() {
 		try {
 			cnx.close();
@@ -86,6 +97,11 @@ public class DAOImpl implements IDAO  {
 			throw new DAOException("Problème lors de la fermeture de la connexion\n" + e.getMessage(), 13);
 		}
 	}
+
+	/**
+	* Récupération de la liste des élèves enregistrés dans la bdd
+	* @return une liste des élèves (Classe Eleve)
+	*/
 
 	@Override
 	public Collection<Eleve> getAll()  {
@@ -105,6 +121,12 @@ public class DAOImpl implements IDAO  {
 		return eleves;
 	}
 
+	/**
+	* Récupération d'un élève (Classe Eleve) dans la bdd à partir de son identifiant
+	* @param l'identifiant (unique) de l'élève
+	* @return L'élève correspondant à l'identifiant si l'identifiant existe
+	*/
+
 	@Override
 	public Eleve getOne(int id) {
 		try {
@@ -121,6 +143,11 @@ public class DAOImpl implements IDAO  {
 			throw new DAOException("Récupération impossible pour l'id " + id + "\n" + e.getMessage(), 30);
 		}
 	}
+
+	/**
+	* Sauvegarde d'un élève  dans la bdd
+	* @param L'Eleve (Classe Eleve) à sauvegarder
+	*/
 
 	@Override
 	public void saveOne(Eleve e) {
@@ -180,6 +207,11 @@ public class DAOImpl implements IDAO  {
 		}
 	}
 
+	/**
+	* Fonction permettant de tester les champs entrés lors de l'enregistrement d'un élève dans la base
+	* @param L'élève dont on veut tester les données renseignées
+	*/
+
 	private boolean testChamps(Eleve e){
 		if(e == null)
 			return false;
@@ -201,6 +233,11 @@ public class DAOImpl implements IDAO  {
 
 		return true;
 	}
+	
+	/**
+	* Suppression d'un élève de la base de données
+	* @param L'identifiant de l'élève qu'on souhaite supprimer
+	*/
 
 	@Override
 	public void deleteOne(int id) {

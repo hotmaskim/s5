@@ -13,7 +13,7 @@
  * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
  * 
  * @file TestDao.java
- * @brief Classe 
+ * @brief Classe dans laquelle sont faits tous les tests sur le DAO en utilisant la bibliothèque JUnit
  */
 
 package ensicaen.tb.mvc.eleves.tests;

@@ -23,7 +23,7 @@ public class DAOException extends RuntimeException {
 	private int code;
 	
 	/**
-	 * Constructeur d'une erreur provenant de DAO
+	 * Constructeur d'une erreur provenant du DAO
 	 * @param message Le message d'erreur
 	 * @param code Le code de l'erreur
 	 */

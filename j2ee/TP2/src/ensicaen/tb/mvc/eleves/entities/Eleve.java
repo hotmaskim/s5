@@ -1,3 +1,21 @@
+/**
+ * ENSICAEN
+ * 6 Boulevard Marechal Juin 
+ * F-14050 Caen Cedex 
+ * 
+ * This file is owned by ENSICAEN students.
+ * No portion of this document may be reproduced, copied
+ * or revised without written permission of the authors.
+ */ 
+
+/**
+ * @author Olivier Brizai <olivier.brizai@ecole.ensicaen.fr>
+ * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
+ * 
+ * @file Eleve.java
+ * @brief Classe représentant un élève
+ */
+
 package ensicaen.tb.mvc.eleves.entities;
 
 import java.io.Serializable;
@@ -15,15 +33,40 @@ public class Eleve implements Serializable {
 	private int annee;
 	private String filiere;
 	
-	
+	/**
+	* Constructeur par défaut d'un élève
+	*/
+
 	public Eleve(){
 	}
 	
+	/**
+	* Constructeur d'un élève
+	* @param Le nom de l'élève
+	* @param Le prénom
+	* @param La date de naissance
+	* @param S'il est redoublant (true or false)
+	* @param En quelle année il est (1, 2 ou 3)
+	* @param Sa filière (INFO, ELEC, MCF)
+	*/
+
 	public Eleve(String nom, String prenom,
 			Date dateNaissance, boolean redoublant, int annee, String filiere) {
 		this(-1, 1, nom, prenom, dateNaissance, redoublant, annee, filiere);
 	}
 	
+	/**
+	* Constructeur d'un élève
+	* @param Son identifiant 
+	* @param Sa version
+	* @param Le nom de l'élève
+	* @param Le prénom
+	* @param La date de naissance
+	* @param S'il est redoublant (true or false)
+	* @param En quelle année il est (1, 2 ou 3)
+	* @param Sa filière (INFO, ELEC, MCF)
+	*/
+
 	public Eleve(int id, int version, String nom, String prenom,
 			Date dateNaissance, boolean redoublant, int annee, String filiere) {
 		this.id = id;

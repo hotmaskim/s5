@@ -13,7 +13,7 @@
  * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
  * 
  * @file IServiceImpl.java
- * @brief 
+ * @brief Classe dans laquelle sont implémentés les services utilisables par l'utilisateur. Les services utilisables sont accessibles par l'interface IService.
  */
 
 package ensicaen.tb.mvc.eleves.service;
@@ -28,7 +28,7 @@ public class IServiceImpl implements IService{
 	IDAO dao;
 	
 	public IServiceImpl() {}
-	
+
 	public IServiceImpl(IDAO dao){
 		this.dao = dao;
 	}
@@ -40,21 +40,42 @@ public class IServiceImpl implements IService{
 	public void setDAO(IDAO dao){
 		this.dao = dao;
 	}
+
+	/**
+	* Suppression d'un élève de la base de données
+	* @param L'identifiant de l'élève qu'on souhaite supprimer
+	*/
 	
 	@Override
 	public void deleteOne(int id) {
 		dao.deleteOne(id);
 	}
+	
+	/**
+	* Récupération de la liste des élèves enregistrés dans la bdd
+	* @return une liste des élèves (Classe Eleve)
+	*/
 
 	@Override
 	public Collection<Eleve> getAll() {
 		return dao.getAll();
 	}
 
+	/**
+	* Récupération d'un élève (Classe Eleve) dans la bdd à partir de son identifiant
+	* @param l'identifiant (unique) de l'élève
+	* @return L'élève correspondant à l'identifiant si l'identifiant existe
+	*/
+
 	@Override
 	public Eleve getOne(int id) {
 		return dao.getOne(id);
 	}
+
+	/**
+	* Sauvegarde d'un élève  dans la bdd
+	* @param L'Eleve (Classe Eleve) à sauvegarder
+	*/
 
 	@Override
 	public void saveOne(Eleve e) {
