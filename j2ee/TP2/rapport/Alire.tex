@@ -48,73 +48,29 @@ frame=tblr} % no special string spaces
 \maketitle
 
 \newpage
-Le but de ce TP était de réaliser une application simple dans le but d'apprendre et comprendre la configuration d'un serveur Tomcat.
 
-\section{Fonctionnement de l'application}
-Notre application est simpliste et n'est que peu modifiée par rapport à ce qui était demandé dans le sujet.
+\section{Tableau des erreurs}
 
-\begin{figure}[H]
-	\center
-	\includegraphics[width=15cm]{diag.png}
-	\caption{Fonctionnement de notre application}
-\end{figure}
-
-Dans un premier temps, l'utilisateur arrive sur une servlet d'accueil, celle-ci vérifie s'il est connecté. Si non, il est dirigé vers le formulaire de connexion, si oui, vers le formulaire de saisie de nom d'animal. Pour se connecter, l'utilisateur doit rentrer un login et un mot de passe, si ceux-ci sont faux, il reste sur la même page, s'ils sont valides, il est redirigé vers la servlet d'accueil (et va pouvoir saisir le nom d'animal). Une fois le nom saisie, celui-ci est transmis à une servlet (\textit{Choix\_animal}) qui va s'occuper de récupérer tous les animaux, contenant l'information entrée, et générer une liste déroulante. L'utilisateur sélectionne l'animal souhaité et clique sur \og Supprimer \fg. Ce choix est transmis à une autre servlet (\textit{Supprime\_animal}), qui va elle se charger d'effectuer la suppression au sein de la base de données. Pour les deux dernières servlets, il y a systématiquement vérification de la session de l'utilisateur.
-
-Nous avons une classe supplémentaire (\textit{GestionBDD}) qui fait l'interface entre les servlets et la base de données.
-
-\section{web.xml}
-Voyons maintenant quelques bribes de notre fichier \textit{web.xml}.
-
-
-Nous définissons ainsi les applets et leur donnons un nom.
-\begin{lstlisting}
-	<servlet>
-		<description>
-		</description>
-		<display-name>Connexion</display-name>
-		<servlet-name>Connexion</servlet-name>
-		<servlet-class>
-		clinique.Connexion</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>Accueil</display-name>
-		<servlet-name>Accueil</servlet-name>
-		<servlet-class>
-		clinique.Accueil</servlet-class>
-	</servlet>
-\end{lstlisting}
-Nous pouvons maintenant \og mapper \fg{} (relier) ces servlet (à l'aide de leur nom) à une url.
-\begin{lstlisting}
-<servlet-mapping>
-	<servlet-name>Connexion</servlet-name>
-	<url-pattern>/Connexion</url-pattern>
-</servlet-mapping>
-<servlet-mapping>
-	<servlet-name>Accueil</servlet-name>
-	<url-pattern>/Accueil</url-pattern>
-</servlet-mapping>
-\end{lstlisting}
-Pour finir, nous déclarons la servlet \textit{Accueil} comme page d'index (page appelée par défaut lorsqu'aucune n'est renseignée).
-\begin{lstlisting}
-<welcome-file-list>
-	<welcome-file>Accueil</welcome-file>
-</welcome-file-list>
-\end{lstlisting}
-
-
-\section{Autres informations}
-\subsubsection{Redirections}
-Dans de nombreuses étapes de notre application, nous effectuons des redirections. Cela est possible grâce à cette fonction :
-\begin{lstlisting}
-response.sendRedirect("connexion.html");
-\end{lstlisting}
-
-\subsubsection{Utilisateurs}
-Afin de gérer les utilisateurs, une table \textit{utilisateur} a été crée au sein de la base de données postgres. Elle ne contient que deux champs : login et password.
-
+\begin{tabular}{|l|c|}
+  \hline
+  Numéro & Type d'erreur \\
+  \hline
+	10 & Impossible de charger le driver \\
+	11 & Problème lors de la connection à la base de données \\
+	12 & Problème lors de la préparation des statements \\
+ 	13 & Problème lors de la fermeture de la connexion à la BDD \\
+	20 & Problème lors de la recherche de la liste totale des élèves dans la BDD \\
+	21 & Pas de résultat dans la recherche de la liste totale des élèves ??????? \\
+	30 & Problème lors de le recherche de l'ID d'un élève dans la BDD\\
+	31 & Pas de résultat dans la recherche de l'ID d'un élève dans la BDD \\
+	40 & Update/Save impossible, problème dans les informations fournies pour l'élève \\
+	41 & Problème lors de la sauvegarde dans la BDD \\
+	42 & Problème lors de la mise à des informations d'un élève dans la BDD\\
+	43 & Update impossible, version de l'élève invalide (problème de synchronisation)\\
+	50 & Problème lors de la suppression d'un élève \\
+	51 & Pas de résultat dans la recherche de suppression d'un élève de la BDD ??????? \\
+  \hline
+\end{tabular}
 
 \end{document}
 
