@@ -13,7 +13,7 @@
  * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
  * 
  * @file TestService.java
- * @brief Class
+ * @brief Classe dans laquelle sont faits tous les tests sur la couche des services (IServiceImpl) en utilisant la bibliothèque JUnit
  */
 
 package ensicaen.tb.mvc.eleves.tests;
@@ -31,6 +31,11 @@ public class TestService extends TestCase{
 
 	private DAOImpl dao;
 	private IServiceImpl service;
+
+	/**
+	* Constructeur de cette classe de test
+	* On créé un DAO qu'on initialise puis qu'on affecte à notre couche de services à tester.
+	*/
 
 	public TestService() {
 		dao = new DAOImpl();
@@ -74,6 +79,11 @@ public class TestService extends TestCase{
 		}
 	}
 
+	/**
+	* Teste les modification et suppressipns d'un élève inexistant
+	* Modifie un élève inexistant. Supprime un élève inexistant.
+	*/
+
 	public void test2(){
 		//Modification d'un élève inexistant
 		try {
@@ -94,6 +104,10 @@ public class TestService extends TestCase{
 		}
 	}
 
+	/**
+	* Teste les problèmes de synchronisation lors de la mise à jour dans la BDD
+	*/
+
 	public void test3(){
 		Eleve e = new Eleve("Dupont", "Henry", new Date(81, 10, 12), false, 1, "INFO");
 		service.saveOne(e);
@@ -113,6 +127,11 @@ public class TestService extends TestCase{
 		
 		service.deleteOne(e1.getId());
 	}
+
+	/**
+	* Test de la validité de la méthode saveOne()
+	* On utilise implicitement ici la métode testChamps() de la classe DAOImpl pour tester tous les champs
+	*/
 
 	public void test4(){
 		Eleve e = new Eleve("", "Henry", new Date(81, 10, 12), false, 1, "ELEC");

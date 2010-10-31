@@ -13,7 +13,7 @@
  * @author Maxime Thoraval <maxime.thoraval@ecole.ensicaen.fr>
  * 
  * @file TestDao.java
- * @brief Classe dans laquelle sont faits tous les tests sur le DAO en utilisant la bibliothèque JUnit
+ * @brief Classe dans laquelle sont faits tous les tests sur le DAO (DaoImpl) en utilisant la bibliothèque JUnit
  */
 
 package ensicaen.tb.mvc.eleves.tests;
@@ -31,14 +31,18 @@ public class TestDao extends TestCase{
 
 	private DAOImpl dao;
 
+	/**
+	* Constructeur de cette classe de test
+	*/
+
 	public TestDao() {
 		dao = new DAOImpl();
 		dao.init();
 	}
 
 	/**
-	 * Test les méthodes de la classe DaoImpl
-	 */
+	* Test les méthodes de la classe DaoImpl
+	*/
 
 	public void test1(){
 		//affichage de la liste des eleves
@@ -72,6 +76,11 @@ public class TestDao extends TestCase{
 		}
 	}
 
+	/**
+	* Teste les modification et suppressipns d'un élève inexistant
+	* Modifie un élève inexistant. Supprime un élève inexistant.
+	*/
+
 	public void test2(){
 		//Modification d'un élève inexistant
 		try {
@@ -92,6 +101,10 @@ public class TestDao extends TestCase{
 		}
 	}
 
+	/**
+	* Teste les problèmes de synchronisation lors de la mise à jour dans la BDD
+	*/
+
 	public void test3(){
 		Eleve e = new Eleve("Dupont", "Henry", new Date(81, 10, 12), false, 1, "INFO");
 		dao.saveOne(e);
@@ -111,6 +124,11 @@ public class TestDao extends TestCase{
 		
 		dao.deleteOne(e1.getId());
 	}
+
+	/**
+	* Test de la validité de la méthode saveOne()
+	* On utilise implicitement ici la métode testChamps() de la classe DAOImpl pour tester tous les champs
+	*/
 
 	public void test4(){
 		Eleve e = new Eleve("", "Henry", new Date(81, 10, 12), false, 1, "ELEC");
