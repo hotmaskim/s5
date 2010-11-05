@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<c:redirect url="/do/list" />
 </body>
 </html>
