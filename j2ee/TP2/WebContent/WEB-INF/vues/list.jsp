@@ -5,10 +5,16 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="stylesheet" href="../blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="../blueprint/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="../blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="../blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+
 <title>Liste des élèves</title>
 </head>
 <body>
-	<h1>Liste des élèves</h1>
+<div class="container">
+	<h1 class="alt">Liste des élèves</h1>
 	<table style='border:solid 1px; text-align:center;' >
 		<tr>
 			<th>ID</th><th>Version</th><th>Prénom</th><th>Nom</th><th>Date de naissance</th><th>Redoublant</th><th>Année</th><th>Filière</th>
@@ -19,7 +25,7 @@
 				<td>${e.version}</td>
 				<td>${e.prenom}</td>
 				<td>${e.nom}</td>
-				<td>${e.dateNaissance}</td>
+				<td>${e.dateNaissanceString}</td>
 				<td>${e.redoublant}</td>
 				<td>${e.annee}</td>
 				<td>${e.filiere}</td>
@@ -30,6 +36,6 @@
 	</table>
 	
 	<a href='<c:url value="/do/edit?id=-1"/>'>Ajout</a>
-	
+	</div>
 </body>
 </html>

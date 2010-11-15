@@ -109,61 +109,72 @@ public class Application extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String[] erreurs = new String[6];
-		boolean containError = false;
 
 		if(request.getPathInfo().equals("/validate")){
 			int id = Integer.parseInt(request.getParameter("id"));
 			int version = Integer.parseInt(request.getParameter("version"));
 			String prenom = request.getParameter("prenom");
-			if(prenom == null || prenom.equals("")) {
-				containError = true;
-				erreurs[0] = "Le prenom est obligatoire";
-			}
-
 			String nom = request.getParameter("nom");
-			if(nom == null || nom.equals("")){
-				containError = true;
-				erreurs[1] = "Le nom est obligatoire";
-			}
-			
 			String dateNaissance = request.getParameter("dateNaissance");
-			if(dateNaissance == null || dateNaissance.equals("")){
-				containError = true;
-				erreurs[2] = "La date de naissance est obligatoire";
-			}
-
 			boolean redoublant = Boolean.parseBoolean(request.getParameter("redoublant"));
+			String filiere = request.getParameter("filiere");
 
 			int annee = 0;
 			try{
 				annee = Integer.parseInt(request.getParameter("annee"));
 			} catch (NumberFormatException nfe){
-				containError = true;
-				erreurs[4] = "Année incorrecte";
+				annee= 0;
 			}
-			String filiere = request.getParameter("filiere");
 
 			Date d = null;
 			try {
 				d = new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissance);
 			} catch (ParseException e) {
-				containError = true;
-				erreurs[2] = "Date incorrecte";
+				d = new Date(0);
 			}
 			Eleve eleve = new Eleve(id, version, nom, prenom, d, redoublant, annee, filiere);
 
-			
-			if(containError) {
+
+			try {
+				service.saveOne(eleve);
+				request.setAttribute("eleve", eleve);
+
+			} catch (DAOException exc) {
+				String[] erreurs = new String[6];
+				erreurs[0] = exc.getMessage();
+				if(exc.getSousCodes().size() > 0){
+					for (Integer sc : exc.getSousCodes()) {
+						switch (sc.intValue()) {
+						case 1:
+							erreurs[1] = "Impossibilité de création de l'objet Eleve : contactez l'administrateur";
+							break;
+						case 2:
+							erreurs[3] = "Le nom ne peut être vide";
+							break;
+						case 3:
+							erreurs[2] = "Le prénom ne peut être vide";
+							break;
+						case 4:
+							erreurs[6] = "Problème dans le choix de la filière";
+							break;
+						case 5:
+							erreurs[4] = "Date incorrecte / Non comprise entre 1980 et 1990";
+							break;
+						case 6:
+							erreurs[5] = "Année incorrecte / Doit être 1, 2 ou 3";
+							break;
+
+						default:
+							break;
+						}
+					}
+				}
 				request.setAttribute("erreurs", erreurs);
 				request.setAttribute("eleve", eleve);
 				getServletContext().getRequestDispatcher(urlEdit + "?id=" + eleve.getId()).forward(request,response);
-				return;
-			}
-			try {
-				service.saveOne(eleve);
-			} catch (DAOException exc) {
 				System.out.println(exc.getMessage());
+				return;
+				
 			}
 		}
 

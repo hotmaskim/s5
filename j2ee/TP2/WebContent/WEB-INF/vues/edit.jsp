@@ -4,13 +4,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ 	<link rel="stylesheet" href="../blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="../blueprint/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="../blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="../blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Formulaire</title>
 </head>
 <body>
-<h1>Ajout/Modification d'un élève</h1>
+<div class="container">
+
+<h1 class="alt">Ajout/Modification d'un élève</h3>
 	
-	<form action="validate" method="post">
+	<c:if test="${!empty erreurs[0]}">
+		<div class="error">${erreurs[0]}</div>
+	</c:if>
+	<c:if test="${!empty erreurs[1]}">
+		<div class="error">${erreurs[1]}</div>
+	</c:if>	<form action="validate" method="post">
+	
 	<table>
 		<tr>
 			<td>Id</td>
@@ -41,17 +54,17 @@
 		<tr>
 			<td>Prénom</td>
 			<td><input type="text" name="prenom" value="${eleve.prenom}"/></td>
-			<td>${erreurs[0]}</td>
+			<td>${erreurs[2]}</td>
 		</tr>
 		<tr>
 			<td>Nom</td>
 			<td><input type="text" name="nom" value="${eleve.nom}"/></td>
-			<td>${erreurs[1]}</td>
+			<td>${erreurs[3]}</td>
 		</tr>
 		<tr>
 			<td>Date de naissance (JJ/MM/AAAA)</td>
-			<td><input type="text" name="dateNaissance" value="${eleve.dateNaissanceString}"/></td>3
-			<td>${erreurs[2]}</td>
+			<td><input type="text" name="dateNaissance" value="${eleve.dateNaissanceString}"/></td>
+			<td>${erreurs[4]}</td>
 		</tr>
 		<tr>
 			<td>Redoublant</td>
@@ -63,7 +76,7 @@
 		<tr>
 			<td>Année</td>
 			<td><input type="text" name="annee" value="${eleve.annee}"/></td>
-			<td>${erreurs[4]}</td>
+			<td>${erreurs[5]}</td>
 		</tr>
 		<tr>
 			<td>Filière</td>
@@ -74,11 +87,12 @@
 					<option value="MCF" <c:if test="${eleve.filiere == 'MCF'}">selected</c:if>>MCF</option>
 				</select>
 			</td>
+			<td>${erreurs[6]}</td>
 		</tr>
 	</table>
 	<input type="submit" value="Valider"/>
 	<a href="list">Annuler</a>
 	</form>
-
+</div>
 </body>
 </html>

@@ -154,12 +154,8 @@ public class DAOImpl implements IDAO  {
 	@Override
 	public void saveOne(Eleve e) {
 		if(testChamps(e).size()>0) {
-			ArrayList<String> erreurs = testChamps(e);
-			String retour = "";
-			for (String err : erreurs) {
-				retour+=err + "\n";
-			}
-			throw new DAOException("Update/Save Impossible: " + retour, 40);
+			ArrayList<Integer> erreurs = testChamps(e);
+			throw new DAOException("Update/Save Impossible", 40, erreurs);
 		} else {
 			if(e.getId() == -1) {
 				try {
@@ -219,26 +215,29 @@ public class DAOImpl implements IDAO  {
 	* @param L'élève dont on veut tester les données renseignées
 	*/
 
-	private ArrayList<String> testChamps(Eleve e){
-		ArrayList<String> erreurs = new ArrayList<String>();
+	private ArrayList<Integer> testChamps(Eleve e){
+		ArrayList<Integer> erreurs = new ArrayList<Integer>();
 		if(e == null)
-			erreurs.add("Eleve vide");
+			erreurs.add(new Integer(1));
 			
 		if(e.getNom() == null || e.getNom().equals(""))
-			erreurs.add("Nom vide");
+			erreurs.add(new Integer(2));
 
 		if(e.getPrenom() == null || e.getPrenom().equals(""))
-			erreurs.add("Prénom vide");
+			erreurs.add(new Integer(3));
 
 		if(e.getFiliere() == null || e.getFiliere().equals("") || (!e.getFiliere().equals("INFO")
 				&& !e.getFiliere().equals("MCF") && !e.getFiliere().equals("ELEC")))
-			erreurs.add("Mauvaise filiere renseignée");
+			erreurs.add(new Integer(4));
 
 		if(e.getDateNaissance().after(new Date(90,1,1)) || e.getDateNaissance().before(new Date(80,12,31))
 				|| e.getDateNaissance().getMonth() <= 0 || e.getDateNaissance().getMonth() > 12 
 				|| e.getDateNaissance().getDay() <= 0 || e.getDateNaissance().getMonth() > 31)
-			erreurs.add("Date de naissance non comprise entre 1980 et 1990");
+			erreurs.add(new Integer(5));
 
+		if(e.getAnnee() <= 0 || e.getAnnee() > 3)
+			erreurs.add(6);
+		
 		return erreurs;
 	}
 	
