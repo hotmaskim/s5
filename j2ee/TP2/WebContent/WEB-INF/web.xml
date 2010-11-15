@@ -17,24 +17,33 @@
 			<param-name>urlErreurs</param-name>
 			<param-value>/WEB-INF/vues/erreurs.jsp</param-value>
 		</init-param>
+
+		<init-param>
+			<param-name>urlExceptions</param-name>
+			<param-value>/WEB-INF/vues/exception.jsp</param-value>
+		</init-param>
 		
 		<init-param>
 			<param-name>urlList</param-name>
 			<param-value>/WEB-INF/vues/list.jsp</param-value>
 		</init-param>
-		
+
 		<init-param>
 			<param-name>urlEdit</param-name>
 			<param-value>/WEB-INF/vues/edit.jsp</param-value>
 		</init-param>
-		
+
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>eleves</servlet-name>
 		<url-pattern>/do/*</url-pattern>
 	</servlet-mapping>
 	<error-page>
-		<error-code>405</error-code>
-		<location>/vues/exception.jsp</location>
+		<error-code>500</error-code>
+		<location>/WEB-INF/vues/exception.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/vues/notfound.jsp</location>
 	</error-page>
 </web-app>

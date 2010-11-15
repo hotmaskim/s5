@@ -83,26 +83,29 @@ public class Application extends HttpServlet {
 
 			getServletContext().getRequestDispatcher(urlList).forward(request, response);
 			return;
-		}
+		} else 
 
-		if(request.getPathInfo().equals("/edit")){
-			int id = Integer.parseInt(request.getParameter("id"));
-			if(id >0) {
-				Eleve eleve = service.getOne(id);
-				request.setAttribute("eleve", eleve);
-			}
+			if(request.getPathInfo().equals("/edit")){
+				int id = Integer.parseInt(request.getParameter("id"));
+				if(id >0) {
+					Eleve eleve = service.getOne(id);
+					request.setAttribute("eleve", eleve);
+				}
 
-			getServletContext().getRequestDispatcher(urlEdit).forward(request, response);
+				getServletContext().getRequestDispatcher(urlEdit).forward(request, response);
 
-			return;
-		}
-		if(request.getPathInfo().equals("/delete")){
-			int id = Integer.parseInt(request.getParameter("id"));
-			service.deleteOne(id);		
-			//getServletContext().getRequestDispatcher(urlList).forward(request, response);
-			response.sendRedirect(getServletContext().getContextPath()+"/do/list");
-			return;
-		}
+				return;
+			} else 
+				if(request.getPathInfo().equals("/delete")){
+					int id = Integer.parseInt(request.getParameter("id"));
+					service.deleteOne(id);		
+					//getServletContext().getRequestDispatcher(urlList).forward(request, response);
+					response.sendRedirect(getServletContext().getContextPath()+"/do/list");
+					return;
+				} else {
+					getServletContext().getRequestDispatcher("/WEB-INF/vues/notfound.jsp").forward(request, response);
+					return;
+				}
 	}
 
 	/**
@@ -168,13 +171,17 @@ public class Application extends HttpServlet {
 							break;
 						}
 					}
+				} else {
+					request.setAttribute("exc", exc);
+					getServletContext().getRequestDispatcher(urlErreurs).forward(request,response);
+					return;
 				}
+
 				request.setAttribute("erreurs", erreurs);
 				request.setAttribute("eleve", eleve);
 				getServletContext().getRequestDispatcher(urlEdit + "?id=" + eleve.getId()).forward(request,response);
-				System.out.println(exc.getMessage());
 				return;
-				
+
 			}
 		}
 

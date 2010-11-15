@@ -16,14 +16,12 @@
 <title>Erreurs</title>
 </head>
 <body>
-
 	<div class="container">
-		<h1 class="alt">Erreurs</h1>
-
-		<div class="error">
-			${pageContext.exception}
-		</div>
-
+		<center>
+		<img src="<%=request.getContextPath() %>/icons/notfound.jpg" />
+		<br />
+		<a href="<%=request.getContextPath() %>"/>Retour à la liste</a>
+		</center>
 	</div>
 
 </body>

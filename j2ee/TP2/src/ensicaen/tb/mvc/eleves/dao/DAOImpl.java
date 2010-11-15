@@ -54,8 +54,9 @@ public class DAOImpl implements IDAO  {
 	*/
 
 	public void init() {
-		String url ="jdbc:postgresql://postgres.ecole.ensicaen.fr/clinique?user=thoraval&password=canari" ;
-
+		//String url ="jdbc:postgresql://postgres.ecole.ensicaen.fr/clinique?user=thoraval&password=canari" ;
+		String url ="jdbc:postgresql://localhost?user=postgres&password=canari" ;
+		
 		try {
 			//Chargement du driver postgresql
 			try {
@@ -230,7 +231,7 @@ public class DAOImpl implements IDAO  {
 				&& !e.getFiliere().equals("MCF") && !e.getFiliere().equals("ELEC")))
 			erreurs.add(new Integer(4));
 
-		if(e.getDateNaissance().after(new Date(90,1,1)) || e.getDateNaissance().before(new Date(80,12,31))
+		if(e.getDateNaissance().after(new Date(90,12,31)) || e.getDateNaissance().before(new Date(80,1,1))
 				|| e.getDateNaissance().getMonth() <= 0 || e.getDateNaissance().getMonth() > 12 
 				|| e.getDateNaissance().getDay() <= 0 || e.getDateNaissance().getMonth() > 31)
 			erreurs.add(new Integer(5));
