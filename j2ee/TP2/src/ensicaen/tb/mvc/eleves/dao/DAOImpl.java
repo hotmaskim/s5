@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import ensicaen.tb.mvc.eleves.entities.Eleve;
 
 public class DAOImpl implements IDAO  {
@@ -79,7 +81,7 @@ public class DAOImpl implements IDAO  {
 			} catch (SQLException ex){
 				throw new DAOException("Problème lors de la préparation des statements\n" + ex.getMessage(), 12);
 			}
-			System.out.println("Connexion OK!!");
+			//System.out.println("Connexion OK!!");
 
 		} catch(Exception e) {
 			System.exit(1);
@@ -151,8 +153,13 @@ public class DAOImpl implements IDAO  {
 
 	@Override
 	public void saveOne(Eleve e) {
-		if(!testChamps(e)) {
-			throw new DAOException("Update/Save Impossible, problème dans les informations de l'élève", 40);
+		if(testChamps(e).size()>0) {
+			ArrayList<String> erreurs = testChamps(e);
+			String retour = "";
+			for (String err : erreurs) {
+				retour+=err + "\n";
+			}
+			throw new DAOException("Update/Save Impossible: " + retour, 40);
 		} else {
 			if(e.getId() == -1) {
 				try {
@@ -212,26 +219,27 @@ public class DAOImpl implements IDAO  {
 	* @param L'élève dont on veut tester les données renseignées
 	*/
 
-	private boolean testChamps(Eleve e){
+	private ArrayList<String> testChamps(Eleve e){
+		ArrayList<String> erreurs = new ArrayList<String>();
 		if(e == null)
-			return false;
-
+			erreurs.add("Eleve vide");
+			
 		if(e.getNom() == null || e.getNom().equals(""))
-			return false;
+			erreurs.add("Nom vide");
 
-		if(e.getPrenom() == null || e.getNom().equals(""))
-			return false;
+		if(e.getPrenom() == null || e.getPrenom().equals(""))
+			erreurs.add("Prénom vide");
 
 		if(e.getFiliere() == null || e.getFiliere().equals("") || (!e.getFiliere().equals("INFO")
 				&& !e.getFiliere().equals("MCF") && !e.getFiliere().equals("ELEC")))
-			return false;
+			erreurs.add("Mauvaise filiere renseignée");
 
 		if(e.getDateNaissance().after(new Date(90,1,1)) || e.getDateNaissance().before(new Date(80,12,31))
 				|| e.getDateNaissance().getMonth() <= 0 || e.getDateNaissance().getMonth() > 12 
 				|| e.getDateNaissance().getDay() <= 0 || e.getDateNaissance().getMonth() > 31)
-			return false;
+			erreurs.add("Date de naissance non comprise entre 1980 et 1990");
 
-		return true;
+		return erreurs;
 	}
 	
 	/**

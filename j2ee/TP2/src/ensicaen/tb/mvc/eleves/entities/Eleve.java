@@ -19,6 +19,7 @@
 package ensicaen.tb.mvc.eleves.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -116,6 +117,20 @@ public class Eleve implements Serializable {
 	
 	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
+	}
+	
+	public String getDateNaissanceString() {
+		if(dateNaissance == null)
+			return "";
+		return new SimpleDateFormat("dd/MM/yyyy").format(dateNaissance);
+	}
+	
+	public void setDateNaissanceString(String dateNaissance) {
+		try {
+			this.dateNaissance = new SimpleDateFormat("dd/MM/yyyy").parse(dateNaissance);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean isRedoublant() {
