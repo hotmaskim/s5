@@ -57,15 +57,15 @@ public class Application extends HttpServlet {
 
 		urlErreurs = this.getInitParameter("urlErreurs");
 		if(urlErreurs == null || urlErreurs.equals(""))
-			throw new ServletException("Param√®tre \"urlErreurs\" non indiqu√© dans web.xml\n");
+			throw new ServletException("Paramètre \"urlErreurs\" non indiqué dans web.xml\n");
 
 		urlEdit = this.getInitParameter("urlEdit");
 		if(urlEdit == null || urlEdit.equals(""))
-			throw new ServletException("Param√®tre \"urlEdit\" non indiqu√© dans web.xml\n");
+			throw new ServletException("Paramètre \"urlEdit\" non indiqué dans web.xml\n");
 
 		urlList = this.getInitParameter("urlList");
 		if(urlList == null || urlList.equals(""))
-			throw new ServletException("Param√®tre \"urlList\" non indiqu√© dans web.xml\n");
+			throw new ServletException("Paramètre \"urlList\" non indiqué dans web.xml\n");
 
 		dao = new DAOImpl();
 		dao.init();
@@ -76,6 +76,7 @@ public class Application extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		request.setAttribute("erreur", urlErreurs);
 		if(request.getPathInfo().equals("/list")){
 			ArrayList<Eleve> eleves = (ArrayList<Eleve>)service.getAll();
@@ -106,6 +107,11 @@ public class Application extends HttpServlet {
 					getServletContext().getRequestDispatcher("/WEB-INF/vues/notfound.jsp").forward(request, response);
 					return;
 				}
+		} catch (DAOException exc) {
+			request.setAttribute("exc", exc);
+			getServletContext().getRequestDispatcher(urlErreurs).forward(request,response);
+			return;
+		}
 	}
 
 	/**
@@ -149,22 +155,22 @@ public class Application extends HttpServlet {
 					for (Integer sc : exc.getSousCodes()) {
 						switch (sc.intValue()) {
 						case 1:
-							erreurs[1] = "Impossibilit√© de cr√©ation de l'objet Eleve : contactez l'administrateur";
+							erreurs[1] = "Impossibilité de création de l'objet Eleve : contactez l'administrateur";
 							break;
 						case 2:
-							erreurs[3] = "Le nom ne peut √™tre vide";
+							erreurs[3] = "Le nom ne peut être vide";
 							break;
 						case 3:
-							erreurs[2] = "Le pr√©nom ne peut √™tre vide";
+							erreurs[2] = "Le prénom ne peut être vide";
 							break;
 						case 4:
-							erreurs[6] = "Probl√®me dans le choix de la fili√®re";
+							erreurs[6] = "Problème dans le choix de la filière";
 							break;
 						case 5:
 							erreurs[4] = "Date incorrecte / Non comprise entre 1980 et 1990";
 							break;
 						case 6:
-							erreurs[5] = "Ann√©e incorrecte / Doit √™tre 1, 2 ou 3";
+							erreurs[5] = "Année incorrecte / Doit être 1, 2 ou 3";
 							break;
 
 						default:

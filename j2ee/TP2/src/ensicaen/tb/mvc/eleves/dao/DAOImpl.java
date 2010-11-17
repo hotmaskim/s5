@@ -231,9 +231,9 @@ public class DAOImpl implements IDAO  {
 				&& !e.getFiliere().equals("MCF") && !e.getFiliere().equals("ELEC")))
 			erreurs.add(new Integer(4));
 
-		if(e.getDateNaissance().after(new Date(90,12,31)) || e.getDateNaissance().before(new Date(80,1,1))
-				|| e.getDateNaissance().getMonth() <= 0 || e.getDateNaissance().getMonth() > 12 
-				|| e.getDateNaissance().getDay() <= 0 || e.getDateNaissance().getMonth() > 31)
+		if(e.getDateNaissance().getYear() > 90 || e.getDateNaissance().getYear() < 80 
+				|| e.getDateNaissance().getMonth() < 0 || e.getDateNaissance().getMonth() > 11 
+				|| e.getDateNaissance().getDate() <= 0 || e.getDateNaissance().getDate() > 31)
 			erreurs.add(new Integer(5));
 
 		if(e.getAnnee() <= 0 || e.getAnnee() > 3)
