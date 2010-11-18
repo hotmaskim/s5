@@ -54,8 +54,7 @@ public class DAOImpl implements IDAO  {
 	*/
 
 	public void init() {
-		//String url ="jdbc:postgresql://postgres.ecole.ensicaen.fr/clinique?user=thoraval&password=canari" ;
-		String url ="jdbc:postgresql://localhost?user=postgres&password=canari" ;
+		String url ="jdbc:postgresql://postgres.ecole.ensicaen.fr/clinique?user=thoraval&password=canari" ;
 		
 		try {
 			//Chargement du driver postgresql
