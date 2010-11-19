@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>TP2</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>eleves</display-name>
+		<servlet-name>eleves</servlet-name>
+		<servlet-class>ensicaen.tb.mvc.eleves.web.Application</servlet-class>
+
+		<init-param>
+			<param-name>urlErreurs</param-name>
+			<param-value>/WEB-INF/vues/erreurs.jsp</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>urlExceptions</param-name>
+			<param-value>/WEB-INF/vues/exception.jsp</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>urlList</param-name>
+			<param-value>/WEB-INF/vues/list.jsp</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>urlEdit</param-name>
+			<param-value>/WEB-INF/vues/edit.jsp</param-value>
+		</init-param>
+
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>eleves</servlet-name>
+		<url-pattern>/do/*</url-pattern>
+	</servlet-mapping>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/vues/exception.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/vues/notfound.jsp</location>
+	</error-page>
+</web-app>

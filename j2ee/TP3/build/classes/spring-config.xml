@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- La classe DAO -->
+	<bean id="dao" class="ensicaen.tb.mvc.eleves.dao.DAOImpl" destroy-method="destroy" init-method="init">
+	</bean>
+	
+	<!-- La classe Service -->
+	<bean id="service" class="ensicaen.tb.mvc.eleves.service.IServiceImpl">
+		<property name="dao" ref="dao" />
+	</bean>
+</beans>
