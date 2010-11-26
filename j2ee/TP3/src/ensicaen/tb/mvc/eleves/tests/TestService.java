@@ -22,14 +22,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import ensicaen.tb.mvc.eleves.dao.DAOException;
-import ensicaen.tb.mvc.eleves.dao.DAOImpl;
+import ensicaen.tb.mvc.eleves.dao.DAOImplCommon;
 import ensicaen.tb.mvc.eleves.entities.Eleve;
 import ensicaen.tb.mvc.eleves.service.IServiceImpl;
 import junit.framework.TestCase;
 
 public class TestService extends TestCase{
 
-	private DAOImpl dao;
+	private DAOImplCommon dao;
 	private IServiceImpl service;
 
 	/**
@@ -38,7 +38,7 @@ public class TestService extends TestCase{
 	*/
 
 	public TestService() {
-		dao = new DAOImpl();
+		dao = new DAOImplCommon();
 		dao.init();
 		service.setDao(dao);
 	}

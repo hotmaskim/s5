@@ -26,17 +26,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
 
 import ensicaen.tb.mvc.eleves.entities.Eleve;
 
-public class DAOImpl implements IDAO  {
+public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO  {
 
+	/*
 	private Connection cnx = null;	
 	private ResultSet curs;
-	private PreparedStatement st1, st2, st3, st4, st5; /* Pour les ordres SQL paramétrés select, insert, update, et delete (st5 = récupe version) */
+	private PreparedStatement st1, st2, st3, st4, st5; /* Pour les ordres SQL paramétrés select, insert, update, et delete (st5 = récupe version)
 
 	private static String GET_ALL_ELEVES = "SELECT * FROM ELEVES";
 	private static String GET_ONE_ELEVE = "SELECT * FROM ELEVES WHERE ID = ?";
@@ -45,17 +47,18 @@ public class DAOImpl implements IDAO  {
 	private static String DELETE_ONE_ELEVE = "DELETE FROM ELEVES WHERE id = ?";
 	private static String GET_CURRENT_SEQVAL = "SELECT CURRVAL('SEQ_ELEVES')";
 	private static String GET_VERSION_ELEVE = "SELECT version FROM eleves WHERE id = ?";
-	
-	public DAOImpl() {
+	 */
+
+	public DAOImplCommon() {
 	}
 
 	/**
-	* Initialisation du DAO : Chargement du driver postgresql, connection à la bdd et préparation des statements
-	*/
+	 * Initialisation du DAO : Chargement du driver postgresql, connection à la bdd et préparation des statements
+	 */
 
 	public void init() {
-		String url ="jdbc:postgresql://postgres.ecole.ensicaen.fr/clinique?user=thoraval&password=canari" ;
-		
+		/*String url ="jdbc:postgresql://postgres.ecole.ensicaen.fr/clinique?user=thoraval&password=canari" ;
+
 		try {
 			//Chargement du driver postgresql
 			try {
@@ -63,14 +66,14 @@ public class DAOImpl implements IDAO  {
 			} catch (Exception e) {
 				throw new DAOException("Impossible de charger le driver\n" + e.getMessage(), 10);
 			}	
-			
+
 			//Connection à la base de données
 			try {
 				cnx = DriverManager.getConnection (url);
 			} catch(SQLException ex) {
 				throw new DAOException("Problème lors de la récupération du driver\n" + ex.getMessage(), 11);
 			}
-			
+
 			//Préparation des statements
 			try {
 				st1 = cnx.prepareStatement(GET_ONE_ELEVE);
@@ -85,29 +88,34 @@ public class DAOImpl implements IDAO  {
 
 		} catch(Exception e) {
 			System.exit(1);
-		}
+		}*/
 	}
 
 	/**
-	* Fermeture de la connection avec la base de données
-	*/
+	 * Fermeture de la connection avec la base de données
+	 */
 
 	public void destroy() {
-		try {
+		/*try {
 			cnx.close();
 		} catch (SQLException e) {
 			throw new DAOException("Problème lors de la fermeture de la connexion\n" + e.getMessage(), 13);
-		}
+		}*/
 	}
 
 	/**
-	* Récupération de la liste des élèves enregistrés dans la bdd
-	* @return une liste des élèves (Classe Eleve)
-	*/
+	 * Récupération de la liste des élèves enregistrés dans la bdd
+	 * @return une liste des élèves (Classe Eleve)
+	 */
 
 	@Override
 	public Collection<Eleve> getAll()  {
-		ArrayList<Eleve> eleves = new ArrayList<Eleve>();
+		try{
+			return getSqlMapClientTemplate().queryForList("Eleve.getAll",null);
+		}catch (Exception e) {
+			throw new DAOException("Récupération de la totalité des élèves impossible\n" + e.getMessage(), 20);
+		}
+		/*ArrayList<Eleve> eleves = new ArrayList<Eleve>();
 		try {
 			Statement requete = cnx.createStatement();
 			curs = requete.executeQuery(GET_ALL_ELEVES);
@@ -120,18 +128,27 @@ public class DAOImpl implements IDAO  {
 		} catch (SQLException e) {
 			throw new DAOException("Récupération de la totalité des élèves impossible\n" + e.getMessage(), 20);
 		}
-		return eleves;
+		return eleves;*/
 	}
 
 	/**
-	* Récupération d'un élève (Classe Eleve) dans la bdd à partir de son identifiant
-	* @param l'identifiant (unique) de l'élève
-	* @return L'élève correspondant à l'identifiant si l'identifiant existe
-	*/
+	 * Récupération d'un élève (Classe Eleve) dans la bdd à partir de son identifiant
+	 * @param l'identifiant (unique) de l'élève
+	 * @return L'élève correspondant à l'identifiant si l'identifiant existe
+	 */
 
 	@Override
 	public Eleve getOne(int id) {
+		Eleve e;
 		try {
+			e =  (Eleve) getSqlMapClientTemplate().queryForObject("Eleve.getOne",id);
+			if(e == null)
+				throw new DAOException("Récupération impossible pour l'id " + id + ", eleve existe-t-il ?\n", 30);
+		}  catch (Exception exc) {
+			throw new DAOException("Récupération impossible pour l'id " + id + "\n" + exc.getMessage(), 30);
+		}
+		return e;
+		/*try {
 			st1.setInt(1, id);
 			curs = st1.executeQuery();
 			if(curs.next()){
@@ -143,17 +160,37 @@ public class DAOImpl implements IDAO  {
 
 		} catch (SQLException e) {
 			throw new DAOException("Récupération impossible pour l'id " + id + "\n" + e.getMessage(), 30);
-		}
+		}*/
 	}
 
 	/**
-	* Sauvegarde d'un élève  dans la bdd
-	* @param L'Eleve (Classe Eleve) à sauvegarder
-	*/
+	 * Sauvegarde d'un élève  dans la bdd
+	 * @param L'Eleve (Classe Eleve) à sauvegarder
+	 */
 
 	@Override
 	public void saveOne(Eleve e) {
+
 		if(testChamps(e).size()>0) {
+			ArrayList<Integer> erreurs = testChamps(e);
+			throw new DAOException("Update/Save Impossible", 40, erreurs);
+		} else {
+			if(e.getId() == -1) {
+				getSqlMapClientTemplate().insert("Eleve.insertionOne",e);
+			} else {
+				try{
+					Eleve tmp = getOne(e.getId());
+					if(tmp.getVersion() > e.getVersion())
+						throw new DAOException("Update impossible, Version de l'élève invalide", 43);
+					e.setVersion(e.getVersion() + 1);
+					getSqlMapClientTemplate().update("Eleve.updateOne",e);
+				} catch (Exception ex) {
+					throw new DAOException("Update impossible \n" + ex.getMessage(), 42);
+				}
+			}
+		}
+
+		/*if(testChamps(e).size()>0) {
 			ArrayList<Integer> erreurs = testChamps(e);
 			throw new DAOException("Update/Save Impossible", 40, erreurs);
 		} else {
@@ -207,19 +244,19 @@ public class DAOImpl implements IDAO  {
 					throw new DAOException("Update impossible \n" + ex.getMessage(), 42);
 				}
 			}
-		}
+		}*/
 	}
 
 	/**
-	* Fonction permettant de tester les champs entrés lors de l'enregistrement d'un élève dans la base
-	* @param L'élève dont on veut tester les données renseignées
-	*/
+	 * Fonction permettant de tester les champs entrés lors de l'enregistrement d'un élève dans la base
+	 * @param L'élève dont on veut tester les données renseignées
+	 */
 
 	private ArrayList<Integer> testChamps(Eleve e){
 		ArrayList<Integer> erreurs = new ArrayList<Integer>();
 		if(e == null)
 			erreurs.add(new Integer(1));
-			
+
 		if(e.getNom() == null || e.getNom().equals(""))
 			erreurs.add(new Integer(2));
 
@@ -237,18 +274,23 @@ public class DAOImpl implements IDAO  {
 
 		if(e.getAnnee() <= 0 || e.getAnnee() > 3)
 			erreurs.add(6);
-		
+
 		return erreurs;
 	}
-	
+
 	/**
-	* Suppression d'un élève de la base de données
-	* @param L'identifiant de l'élève qu'on souhaite supprimer
-	*/
+	 * Suppression d'un élève de la base de données
+	 * @param L'identifiant de l'élève qu'on souhaite supprimer
+	 */
 
 	@Override
 	public void deleteOne(int id) {
 		try {
+			getSqlMapClientTemplate().delete("Eleve.deleteOne",id);
+		} catch (Exception ex) {
+			throw new DAOException("Delete impossible \n" + ex.getMessage(), 50);
+		}
+		/*try {
 			if(id > 0){
 				st4.setInt(1, id);
 
@@ -256,7 +298,7 @@ public class DAOImpl implements IDAO  {
 			}
 		} catch (SQLException ex) {
 			throw new DAOException("Delete impossible \n" + ex.getMessage(), 50);
-		}
+		}*/
 	}
 
 }

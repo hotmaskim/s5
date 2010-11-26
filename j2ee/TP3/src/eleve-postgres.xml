@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap>
+	<!--  alias classe [Eleve] -->
+	<typeAlias alias="Eleve.classe" type = "ensicaen.tb.mvc.eleves.entities.Eleve"/>
+	
+	<!--  mapping table [ELEVES] -objet [Eleve] -->
+	<resultMap id="Eleve.map" class="Eleve.classe">
+		<result property="id" column="id"/>
+		<result property="version" column="version"/>
+		<result property="nom" column="nom"/>
+		<result property="prenom" column="prenom"/>
+		<result property="dateNaissance" column="datenaissance"/>
+		<result property="redoublant" column="redoublant"/>
+		<result property="annee" column="annee"/>
+		<result property="filiere" column="filiere"/>		
+	</resultMap>
+	
+	<!--  liste de tous les eleves -->
+	<select id="Eleve.getAll" resultMap="Eleve.map">
+		SELECT * FROM ELEVES
+	</select>
+	
+	<!--  obtenir un eleve en particulier  -->
+	<select id="Eleve.getOne" parameterClass="int" resultMap="Eleve.map">
+		SELECT * FROM ELEVES WHERE id=#value#
+	</select>
+	
+	<!-- ajouter un eleve -->
+	<insert id="Eleve.insertionOne" parameterClass="Eleve.classe">
+		<selectKey keyProperty="id">
+			SELECT nextval('SEQ_ELEVES') as value
+		</selectKey>
+		INSERT INTO ELEVES values (#id#, 1, #nom# , #prenom#, #dateNaissance#, #redoublant#, #annee#, #filiere#)
+	</insert>
+	
+	<!-- mettre à jour un élève -->
+	<update id="Eleve.updateOne" parameterClass="Eleve.classe">
+		UPDATE ELEVES SET version = #version#, nom = #nom#, prenom = #prenom#, dateNaissance = #dateNaissance#,
+		 annee = #annee#, redoublant = #redoublant#, filiere = #filiere# WHERE id = #id#
+	</update>
+	
+	<!-- supprimer un élève -->
+	<delete id="Eleve.deleteOne" parameterClass="int">
+		DELETE FROM ELEVES WHERE id = #id#
+	</delete>
+
+</sqlMap>

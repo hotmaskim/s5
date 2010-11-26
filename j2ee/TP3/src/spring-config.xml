@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
+	<!-- la source de données utilisant jdbc -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource"
+		destroy-method="destroy">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://postgres/clinique"/>
+		<property name="username" value="thoraval"/>	
+		<property name="password" value="canari"/>
+	</bean> 
+
+	<!-- SqlMapClient -->
+	<bean id="sqlMapClient"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource"><ref local="dataSource"/></property>
+		<property name="configLocation" value="classpath:sql-map-config-postgres.xml"/>
+	</bean>
+
 	<!-- La classe DAO -->
-	<bean id="dao" class="ensicaen.tb.mvc.eleves.dao.DAOImpl" destroy-method="destroy" init-method="init">
+	<bean id="dao" class="ensicaen.tb.mvc.eleves.dao.DAOImplCommon">
+		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
 	<!-- La classe Service -->

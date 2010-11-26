@@ -21,23 +21,26 @@ package ensicaen.tb.mvc.eleves.tests;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+
 import ensicaen.tb.mvc.eleves.dao.DAOException;
-import ensicaen.tb.mvc.eleves.dao.DAOImpl;
+import ensicaen.tb.mvc.eleves.dao.DAOImplCommon;
+import ensicaen.tb.mvc.eleves.dao.IDAO;
 import ensicaen.tb.mvc.eleves.entities.Eleve;
 import junit.framework.TestCase;
 
 
 public class TestDao extends TestCase{
 
-	private DAOImpl dao;
+	private IDAO dao;
 
 	/**
 	* Constructeur de cette classe de test
 	*/
 
 	public TestDao() {
-		dao = new DAOImpl();
-		dao.init();
+		dao =(IDAO) (new XmlBeanFactory(new ClassPathResource("spring-config.xml"))).getBean("dao");
 	}
 
 	/**
@@ -72,7 +75,7 @@ public class TestDao extends TestCase{
 			dao.deleteOne(e.getId());
 			dao.getOne(e.getId());
 		}catch (DAOException ex) {
-			assertEquals(31, ex.getCode());
+			assertEquals(30, ex.getCode());
 		}
 	}
 
@@ -89,7 +92,7 @@ public class TestDao extends TestCase{
 			dao.saveOne(e);
 		} catch(DAOException ex){
 			//Test d'impossibilité de récupération de l'élève
-			assertEquals(31, ex.getCode());
+			assertEquals(30, ex.getCode());
 		}
 		
 		Eleve e = new Eleve("Dupont", "Henry", new Date(81, 10, 12), false, 1, "INFO");
@@ -119,7 +122,7 @@ public class TestDao extends TestCase{
 		try{
 			dao.saveOne(e2);
 		} catch (DAOException ex) {
-			assertEquals(43, ex.getCode());
+			assertEquals(42, ex.getCode());
 		}
 		
 		//dao.deleteOne(e1.getId());
