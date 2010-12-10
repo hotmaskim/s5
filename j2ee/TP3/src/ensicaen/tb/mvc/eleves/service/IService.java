@@ -51,4 +51,11 @@ public interface IService {
 	*/
 
 	void deleteOne(int id);
+	
+	
+	void saveMany(Eleve[] eleves);
+	
+	void deleteMany(int[] ids);
+	
+	int nbEleve();
 }

@@ -29,6 +29,10 @@
 		SELECT * FROM ELEVES WHERE id=#value#
 	</select>
 	
+	<select id="Eleve.nbEleve" resultClass="int">
+		SELECT count(*) FROM ELEVES
+	</select>
+	
 	<!-- ajouter un eleve -->
 	<insert id="Eleve.insertionOne" parameterClass="Eleve.classe">
 		<selectKey keyProperty="id">

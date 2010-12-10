@@ -82,4 +82,22 @@ public class IServiceImpl implements IService{
 		dao.saveOne(e);
 	}
 
+	@Override
+	public void deleteMany(int[] ids) {
+		for (int id : ids) {
+			dao.deleteOne(id);
+		}
+	}
+
+	@Override
+	public void saveMany(Eleve[] eleves) {
+		for (Eleve eleve : eleves) {
+			dao.saveOne(eleve);
+		}
+	}
+	
+	public int nbEleve(){
+		return dao.nbEleves();
+	}
+
 }

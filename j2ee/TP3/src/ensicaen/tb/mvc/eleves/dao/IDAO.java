@@ -53,4 +53,6 @@ public interface IDAO {
 
 	void deleteOne(int id);
 	
+	int nbEleves();
+	
 }

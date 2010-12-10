@@ -2,28 +2,53 @@
 <!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	<!-- la source de données utilisant jdbc -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource"
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource"
 		destroy-method="destroy">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://postgres/clinique"/>
-		<property name="username" value="thoraval"/>	
-		<property name="password" value="canari"/>
-	</bean> 
+		<property name="url" value="jdbc:postgresql://postgres/clinique" />
+		<property name="username" value="thoraval" />
+		<property name="password" value="canari" />
+	</bean>
 
 	<!-- SqlMapClient -->
-	<bean id="sqlMapClient"
-		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-		<property name="dataSource"><ref local="dataSource"/></property>
-		<property name="configLocation" value="classpath:sql-map-config-postgres.xml"/>
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="configLocation" value="classpath:sql-map-config-postgres.xml" />
 	</bean>
 
 	<!-- La classe DAO -->
 	<bean id="dao" class="ensicaen.tb.mvc.eleves.dao.DAOImplCommon">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
-	
+
+	<!-- Définition du gestionnaire de transaction -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
 	<!-- La classe Service -->
-	<bean id="service" class="ensicaen.tb.mvc.eleves.service.IServiceImpl">
-		<property name="dao" ref="dao" />
+	<!--
+		<bean id="service"
+		class="ensicaen.tb.mvc.eleves.service.IServiceImpl"> <property
+		name="dao" ref="dao" /> </bean>
+	-->
+	<bean id="service"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="target">
+			<bean class="ensicaen.tb.mvc.eleves.service.IServiceImpl">
+				<property name="dao" ref="dao" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="saveMany">PROPAGATION_REQUIRED</prop>
+				<prop key="deleteMany">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
 	</bean>
 </beans>

@@ -21,16 +21,20 @@ package ensicaen.tb.mvc.eleves.tests;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+
 import ensicaen.tb.mvc.eleves.dao.DAOException;
 import ensicaen.tb.mvc.eleves.dao.DAOImplCommon;
+import ensicaen.tb.mvc.eleves.dao.IDAO;
 import ensicaen.tb.mvc.eleves.entities.Eleve;
+import ensicaen.tb.mvc.eleves.service.IService;
 import ensicaen.tb.mvc.eleves.service.IServiceImpl;
 import junit.framework.TestCase;
 
 public class TestService extends TestCase{
 
-	private DAOImplCommon dao;
-	private IServiceImpl service;
+	private IService service;
 
 	/**
 	* Constructeur de cette classe de test
@@ -38,9 +42,7 @@ public class TestService extends TestCase{
 	*/
 
 	public TestService() {
-		dao = new DAOImplCommon();
-		dao.init();
-		service.setDao(dao);
+		service =(IService) (new XmlBeanFactory(new ClassPathResource("spring-config.xml"))).getBean("service");
 	}
 
 	/**
@@ -75,7 +77,7 @@ public class TestService extends TestCase{
 			service.deleteOne(e.getId());
 			service.getOne(e.getId());
 		}catch (DAOException ex) {
-			assertEquals(31, ex.getCode());
+			assertEquals(30, ex.getCode());
 		}
 	}
 
@@ -92,7 +94,7 @@ public class TestService extends TestCase{
 			service.saveOne(e);
 		} catch(DAOException ex){
 			//Test d'impossibilité de récupération de l'élève
-			assertEquals(31, ex.getCode());
+			assertEquals(30, ex.getCode());
 		}
 		
 		Eleve e = new Eleve("Dupont", "Henry", new Date(81, 10, 12), false, 1, "INFO");
@@ -122,7 +124,7 @@ public class TestService extends TestCase{
 		try{
 			service.saveOne(e2);
 		} catch (DAOException ex) {
-			assertEquals(43, ex.getCode());
+			assertEquals(42, ex.getCode());
 		}
 		
 		service.deleteOne(e1.getId());
@@ -140,6 +142,47 @@ public class TestService extends TestCase{
 			service.saveOne(e);
 		} catch (DAOException ex) {
 			assertEquals(40, ex.getCode());
+		}
+	}
+	
+	/**
+	 * Vérifie que l'ajout de plusieurs eleves n'est pas effectué si un n'est pas valide
+	 * Vérifie que la suppression de plusieurs élèves n'est pas effecthé si un n'est pas valide
+	 */
+	public void test5(){
+		int nbEleve = service.nbEleve();
+		Eleve e1 = new Eleve("E1", "e1", new Date(81,10,12), false, 1, "INFO");
+		Eleve e2 = new Eleve("E2", "e2", new Date(81,10,12), false, 1, "INFO");
+		Eleve e3 = new Eleve("E3", "e3", new Date(81,10,12), false, 1, "");
+		Eleve e4 = new Eleve("E4", "e4", new Date(81,10,12), false, 1, "INFO");
+		
+		try{
+			service.saveMany(new Eleve[]{e1,e2,e3,e4});
+		} catch (DAOException ex){
+			assertEquals(nbEleve, service.nbEleve());
+		}
+		
+		e1 = new Eleve("E1", "e1", new Date(81,10,12), false, 1, "INFO");
+		e2 = new Eleve("E2", "e2", new Date(81,10,12), false, 1, "INFO");
+		e3 = new Eleve("E3", "e3", new Date(81,10,12), false, 1, "INFO");
+		try{
+			service.saveMany(new Eleve[]{e1,e2, e3});
+			assertEquals(nbEleve+3, service.nbEleve());
+		} catch (DAOException ex){
+			System.out.println("Erreur");
+		}
+		
+		try{
+			service.deleteMany(new int[]{e1.getId(),01});
+		} catch (DAOException ex){
+			assertEquals(nbEleve+3, service.nbEleve());
+		}	
+		
+		try{
+			service.deleteMany(new int[]{e1.getId(), e2.getId()});
+			assertEquals(nbEleve+1, service.nbEleve());
+		} catch (DAOException ex){
+			System.out.println("Erreur");
 		}
 	}
 

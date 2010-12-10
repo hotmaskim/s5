@@ -301,4 +301,13 @@ public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO  {
 		}*/
 	}
 
+	@Override
+	public int nbEleves() {
+		try {
+			return (Integer)getSqlMapClientTemplate().queryForObject("Eleve.nbEleve");
+		} catch (Exception ex) {
+			throw new DAOException("Delete impossible \n" + ex.getMessage(), 50);
+		}
+	}
+
 }
