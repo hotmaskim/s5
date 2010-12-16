@@ -100,6 +100,14 @@ Notre implémentation d'IService est également défninie dans le fichier spring
 On constate qu'elle a comme attribut un "dao", qui fait bien entendu référence au "dao" définit dans le même fichier en XML. Ainsi lorsque l'on
 instancie la classe qui gère les service, la classe du DAO sera automatiquement intanciée grâce au XML.
 
+\begin{figure}[H]
+	\center
+	\includegraphics[width=15cm]{img/spring.pdf}
+	\caption{Architecture d'utilisation de spring}
+\end{figure}
+\newpage
+
+
 \section{Utilisation d'iBatis}
 
 iBatis est une nouvelle couche qui vient s'insérer entre le DAO et la couche d'accès aux données (JDBC).
