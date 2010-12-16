@@ -61,14 +61,15 @@ Avant d'utiliser Spring, la récupération d'une classe DAO se faisait de cette 
 	dao.init();
 \end{lstlisting}
 Ici, nous avons instancié un objet de type \textit{DAOImpl} et l'avons initialisé.\\
-Le principal problème est lié au fait que nous utilisons une classe définie. Si l'on décide de changer le nom du DAO (nouveau DAO), il faudra modifier le code en conséquence.
+Le principal problème est lié au fait que nous utilisons une classe définie. Si l'on décide de changer le nom du DAO , il faudra modifier le code en conséquence. L'utilisation de Spring va ainsi eviter plusieurs recompilations en cas de changement du DAO. La couche web et le couche service ne seront en effet pas à recompiler.
 
 Voici le nouveau code lorsque l'on utilise Spring :
+
 \begin{lstlisting}
 	IDAO dao =(IDAO) (new XmlBeanFactory(new ClassPathResource("spring-config.xml"))).getBean("dao");
 \end{lstlisting}
 
-L'identifiant "dao" fait ici appel à la classe définie dans le fichier spring-config.xml :
+L'identifiant "dao" fait ici appel au bean définie dans le fichier spring-config.xml :
 
 \begin{lstlisting}
 <bean id="dao" class="ensicaen.tb.mvc.eleves.dao.DAOImpl" destroy-method="destroy" init-method="init">
@@ -76,8 +77,104 @@ L'identifiant "dao" fait ici appel à la classe définie dans le fichier spring-
 \end{lstlisting}
 
 Le XML va permettre d'instancier le bean, tandis que c'est le java qui l'utilisera.
+On remarque que l'on ignore dans le code java de quelle implémentation du IDAO il s'agit. Ce choix est fait dans le XML et permet de diminuer les dépendances entre les couches.
+
+On vient de mettre en place Spring pour la couche DAO et on fait de même pour la couche service grâce à un bean "service qui représentera une instance de notre classe de service.
+
+Dans le fichier Application.java, on appellera alors l'instance de service ainsi : 
+
+\begin{lstlisting}
+service =(IService) (new XmlBeanFactory(new ClassPathResource("spring-config.xml"))).getBean("service");
+\end{lstlisting}
+
+On remarque que l'on fait appelle à un IService et non plus à une ServiceImpl, ce qui limite les dépendances (comme pour le DAO).
+
+\section{Utilisation d'iBatis}
+
+iBatis est une nouvelle couche qui vient s'insérer entre le DAO et la couche d'accès aux données (JDBC).
+
+Le nouveau DAO appellé DAOImplCommon est définit ainsi :
+
+\begin{lstlisting}
+public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO {
+\end{lstlisting}
+
+Il remplace la précédente classe DAOImpl.
+Il implémente naturellement l'interface IDAO, mais surtout il hérite de SqlMapClientSupport qui est une classe de la bibliothèque iBatis.
+
+
+Dans le fichier spring-config.xml on définit le bean DAO ainsi :
+
+\begin{lstlisting}
+<!-- La classe DAO -->
+	<bean id="dao" class="ensicaen.tb.mvc.eleves.dao.DAOImplCommon">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap>
+	<!--  alias classe [Eleve] -->
+	<typeAlias alias="Eleve.classe" type = "ensicaen.tb.mvc.eleves.entities.Eleve"/>
+	
+	<!--  mapping table [ELEVES] -objet [Eleve] -->
+	<resultMap id="Eleve.map" class="Eleve.classe">
+		<result property="id" column="id"/>
+		<result property="version" column="version"/>
+		<result property="nom" column="nom"/>
+		<result property="prenom" column="prenom"/>
+		<result property="dateNaissance" column="datenaissance"/>
+		<result property="redoublant" column="redoublant"/>
+		<result property="annee" column="annee"/>
+		<result property="filiere" column="filiere"/>		
+	</resultMap>
+	
+	<!--  liste de tous les eleves -->
+	<select id="Eleve.getAll" resultMap="Eleve.map">
+		SELECT * FROM ELEVES
+	</select>
+	
+	<!--  obtenir un eleve en particulier  -->
+	<select id="Eleve.getOne" parameterClass="int" resultMap="Eleve.map">
+		SELECT * FROM ELEVES WHERE id=#value#
+	</select>
+	
+	<select id="Eleve.nbEleve" resultClass="int">
+		SELECT count(*) FROM ELEVES
+	</select>
+	
+	<!-- ajouter un eleve -->
+	<insert id="Eleve.insertionOne" parameterClass="Eleve.classe">
+		<selectKey keyProperty="id">
+			SELECT nextval('SEQ_ELEVES') as value
+		</selectKey>
+		INSERT INTO ELEVES values (#id#, 1, #nom# , #prenom#, #dateNaissance#, #redoublant#, #annee#, #filiere#)
+	</insert>
+	
+	<!-- mettre à jour un élève -->
+	<update id="Eleve.updateOne" parameterClass="Eleve.classe">
+		UPDATE ELEVES SET version = #version#, nom = #nom#, prenom = #prenom#, dateNaissance = #dateNaissance#,
+		 annee = #annee#, redoublant = #redoublant#, filiere = #filiere# WHERE id = #id#
+	</update>
+	
+	<!-- supprimer un élève -->
+	<delete id="Eleve.deleteOne" parameterClass="int">
+		DELETE FROM ELEVES WHERE id = #id#
+	</delete>
+
+</sqlMap>
+\end{lstlisting}
 
 \end{document}
+
 
 
 
