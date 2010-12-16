@@ -163,6 +163,7 @@ public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO {
 Il remplace la précédente classe DAOImpl.
 Il implémente naturellement l'interface IDAO, mais surtout il hérite de SqlMapClientSupport qui est une classe de la bibliothèque iBatis.
 
+
 Le fichier  \textit{sql-map-config-postgres.xml} permet de "mapper" nos classes métiers à des tables de la base de données.
 \textit{sqlMapClient}. 
 
@@ -233,6 +234,43 @@ On a ainsi déporté toute la partie JDBC au sein de fichier XML.
 </sqlMap>
 \end{lstlisting}
 
+L'appel aux fonctions de cette classe Eleve, se feront comme précédemment dans le DAO, en l'occurance ici dans la classe \textit{DaoImplCommon}.
+En revanche l'appel est ici transparent puisque l'accès à la BDD est géré dans le XML :
+Voici un exemple pour la suppression d'un élève :
+
+\begin{lstlisting}
+public void deleteOne(int id) {
+		try {
+			getSqlMapClientTemplate().delete("Eleve.deleteOne",id);
+		} catch (Exception ex) {
+			throw new DAOException("Delete impossible \n" + ex.getMessage(), 50);
+		}
+}
+\end{lstlisting}
+
+Comme précédemment, pour diminuer le couplage, l'implémentation de la couche service est définie dans le fichier \textit{spring-config.xml} :
+
+\begin{lstlisting}
+<bean id="service"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="target">
+			<bean class="ensicaen.tb.mvc.eleves.service.IServiceImpl">
+				<property name="dao" ref="dao" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="saveMany">PROPAGATION_REQUIRED</prop>
+				<prop key="deleteMany">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+\end{lstlisting}
+
+Ici aussi l'instanciation de la classe de service provoque l'instanciation de la classe du DAO. (rajouter un comentaire sur les transactions)
+
+Voici un schéma qui résume un peu plus clairement ce qui a été dit :
 
 \begin{figure}[H]
 	\center
