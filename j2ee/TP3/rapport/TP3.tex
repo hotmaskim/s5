@@ -51,18 +51,23 @@ frame=tblr} % no special string spaces
 \section{Utilisation de Spring}
 Dans la première partie du TP, nous avons appris à utiliser les bases de Spring. Ce dernier va nous permettre de dissocier, du code Java, 
 les classes de service et les DAO. Ceci aura pour effet une plus grande facilité à changer de méthode récupération des données.\\
-Par exemple: Nous pourrons décider de passer de l'utilisation d'une base de données à celle des fichiers juste en modifiant un fichier XML 
-(en supposant que les classes nécessaires ont été crées au préalable).
+Par exemple: Nous pourrons décider de passer de l'utilisation d'une base de données à celle de fichiers juste en modifiant un fichier XML 
+(en supposant que les classes nécessaires aient été créées au préalable).
 
 \subsection{DAO}
-Avant d'utiliser Spring, la récupération d'une classe DAO se faisait de cette manière 
+Avant d'utiliser Spring, la récupération d'une classe DAO se faisait de cette manière :
 \begin{lstlisting}
 	DAOImpl dao = new DAOImpl();
 	dao.init();
 \end{lstlisting}
 Ici, nous avons instancié un objet de type \textit{DAOImpl} et l'avons initialisé.\\
-Le principal problème est lié au fait que nous utilisons une classe définie 
+Le principal problème est lié au fait que nous utilisons une classe définie. Si l'on décide de créer un nouveau DAO, il faudra modifier le code en conséquence.
 
+Voici le nouveau code lorsque l'on utilise Spring.
+\begin{lstlisting}
+	DAOImpl dao = new DAOImpl();
+	dao.init();
+\end{lstlisting}
 
 \end{document}
 
