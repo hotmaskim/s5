@@ -1,0 +1,70 @@
+\documentclass[a4paper,12pt]{article} 
+\usepackage[T1]{fontenc}              
+\usepackage[frenchb]{babel} % césures, titres français
+\usepackage[utf8]{inputenc} % encodage
+\usepackage[a4paper,left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % marges
+\usepackage{graphicx} % insertion d'images
+\usepackage{rotating}
+\usepackage{float} % permet d'utiliser H pour placer un flottant obligatoirement
+\usepackage{pdfpages} % inclusion de PDF au sein du document
+\usepackage{listings}
+\pagestyle{plain} % pied de pages simples
+
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex} % espace entre les paragraphes
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+\lstset{% general command to set parameter(s)
+basicstyle=\ttfamily, % print whole listing small
+keywordstyle=\color{black}\bfseries\underbar,
+% underlined bold black keywords
+identifierstyle=, % nothing happens
+commentstyle=\color{white}, % white comments
+showstringspaces=false,
+numbers=left,
+language=java,
+breaklines=true,
+frame=tblr} % no special string spaces
+
+%%%% debut macro %%%%
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                           {-3.5ex \@plus -1ex \@minus -.2ex}%
+                           {2.3ex \@plus.2ex}%
+                           {\normalfont\Large\bfseries}}
+\makeatother
+%%%% fin macro %%%%
+
+
+
+% Def
+\newcommand{\code}[1]{{\lstinline{#1}}}
+
+\begin{document}
+\newpage
+\title{J2EE\\TP 3}
+\date{}
+\author{BRIZAI Olivier\\THORAVAL Maxime}
+\maketitle
+
+
+\section{Utilisation de Spring}
+Dans la première partie du TP, nous avons appris à utiliser les bases de Spring. Ce dernier va nous permettre de dissocier, du code Java, 
+les classes de service et les DAO. Ceci aura pour effet une plus grande facilité à changer de méthode récupération des données.\\
+Par exemple: Nous pourrons décider de passer de l'utilisation d'une base de données à celle des fichiers juste en modifiant un fichier XML 
+(en supposant que les classes nécessaires ont été crées au préalable).
+
+\subsection{DAO}
+Avant d'utiliser Spring, la récupération d'une classe DAO se faisait de cette manière 
+\begin{lstlisting}
+	DAOImpl dao = new DAOImpl();
+	dao.init();
+\end{lstlisting}
+Ici, nous avons instancié un objet de type \textit{DAOImpl} et l'avons initialisé.\\
+Le principal problème est lié au fait que nous utilisons une classe définie 
+
+
+\end{document}
+
+
+
