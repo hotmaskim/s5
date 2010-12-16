@@ -130,8 +130,7 @@ Etape 1 : La connection au SGBD est faite dans le bean \textit{dataSource} :
 	</bean>
 \end{lstlisting}
 
-Etape 2 : On souhaite déporter la classe métier Eleve et ses accès aux données dans le XML. On définit donc ici un lien vers la 
-définition de cette classe en XML et à ses méthodes :
+Etape 2 : On va maintenant définir le fichier XML contenant les informations sur l'architecture de la base de données:
 
 \begin{lstlisting}
 <!-- SqlMapClient -->
@@ -143,10 +142,10 @@ définition de cette classe en XML et à ses méthodes :
 	</bean>
 \end{lstlisting}
 
-On remarque que ce bean est lié au Bean précédent \textit{dataSource}, en effet l'accès aux données des élèves requiert une connection au SGDB.
+On remarque que ce bean est lié au Bean précédent \textit{dataSource}, en effet l'accès aux données requiert une connexion au SGDB.
 
 Etape 3 : L'étape située en amont de l'accès aux données, c'est la définition du bean du DAO. Ce bean est lié au bean \textit{sqlMapClient} précédent
-à travers lequel il va effectuer ses requêtes sur les élèves.
+à travers lequel il va effectuer ses requêtes sur la base de données.
 
 \begin{lstlisting}
 <!-- La classe DAO -->
@@ -164,7 +163,7 @@ public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO {
 Il remplace la précédente classe DAOImpl.
 Il implémente naturellement l'interface IDAO, mais surtout il hérite de SqlMapClientSupport qui est une classe de la bibliothèque iBatis.
 
-Le fichier  \textit{sql-map-config-postgres.xml} permet de "mapper" toutes nos déclaration de classes métiers en XML. On a vu au dessus qu'il était lié au bean
+Le fichier  \textit{sql-map-config-postgres.xml} permet de "mapper" nos classes métiers à des tables de la base de données.
 \textit{sqlMapClient}. 
 
 \begin{lstlisting}
@@ -173,8 +172,8 @@ Le fichier  \textit{sql-map-config-postgres.xml} permet de "mapper" toutes nos d
 </sqlMapConfig>
 \end{lstlisting}
 
-Dans \textit{sql-map-config-postgres.xml} on a renseigné une ressource, la classe Eleve. Grâce à ce renseignement on aura accès au fichier \textit{eleve-postgres.xml}. Dans ce fichier est défini la classe Eleve. On a ainsi déporté comme prévu l'ensemble des commandes JDBC dans le XML.
-
+Dans \textit{sql-map-config-postgres.xml} on a renseigné le fichier \textit{eleve-postgres.xml}. Dans ce fichier est défini le mapping de classe Eleve avec une table associée dans la base de donnée. Ce mapping va permettre à iBatis d'instancier un bean de type Eleve à partir des informations de la base de données, tout cela sans que le développeur n'est à intervenir. De plus, une insertion dans la base d'un Eleve va automatiquement mettre l'objet avec l'id généré.
+On a ainsi déporté toute la partie JDBC au sein de fichier XML.
 
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -233,6 +232,15 @@ Dans \textit{sql-map-config-postgres.xml} on a renseigné une ressource, la clas
 
 </sqlMap>
 \end{lstlisting}
+
+
+\begin{figure}[H]
+	\center
+	\includegraphics[width=15cm]{img/springibatis.pdf}
+	\caption{Architecture d'utilisation de spring avec ibatis}
+\end{figure}
+
+\newpage
 
 \end{document}
 
