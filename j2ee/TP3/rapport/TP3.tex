@@ -88,6 +88,17 @@ service =(IService) (new XmlBeanFactory(new ClassPathResource("spring-config.xml
 \end{lstlisting}
 
 On remarque que l'on fait appelle à un IService et non plus à une ServiceImpl, ce qui limite les dépendances (comme pour le DAO).
+Notre implémentation d'IService est également défninie dans le fichier spring-config.xml :
+
+\begin{lstlisting}
+<!-- La classe Service -->
+	<bean id="service" class="ensicaen.tb.mvc.eleves.service.IServiceImpl">
+		<property name="dao" ref="dao" />
+	</bean>
+\end{lstlisting}
+
+On constate qu'elle a comme attribut un "dao", qui fait bien entendu référence au "dao" définit dans le même fichier en XML. Ainsi lorsque l'on
+instancie la classe qui gère les service, la classe du DAO sera automatiquement intanciée grâce au XML.
 
 \section{Utilisation d'iBatis}
 
@@ -98,7 +109,6 @@ Le nouveau DAO appellé DAOImplCommon est définit ainsi :
 \begin{lstlisting}
 public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO {
 \end{lstlisting}
-
 Il remplace la précédente classe DAOImpl.
 Il implémente naturellement l'interface IDAO, mais surtout il hérite de SqlMapClientSupport qui est une classe de la bibliothèque iBatis.
 
