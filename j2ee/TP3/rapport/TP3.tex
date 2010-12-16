@@ -61,13 +61,21 @@ Avant d'utiliser Spring, la récupération d'une classe DAO se faisait de cette 
 	dao.init();
 \end{lstlisting}
 Ici, nous avons instancié un objet de type \textit{DAOImpl} et l'avons initialisé.\\
-Le principal problème est lié au fait que nous utilisons une classe définie. Si l'on décide de créer un nouveau DAO, il faudra modifier le code en conséquence.
+Le principal problème est lié au fait que nous utilisons une classe définie. Si l'on décide de changer le nom du DAO (nouveau DAO), il faudra modifier le code en conséquence.
 
-Voici le nouveau code lorsque l'on utilise Spring.
+Voici le nouveau code lorsque l'on utilise Spring :
 \begin{lstlisting}
-	DAOImpl dao = new DAOImpl();
-	dao.init();
+	IDAO dao =(IDAO) (new XmlBeanFactory(new ClassPathResource("spring-config.xml"))).getBean("dao");
 \end{lstlisting}
+
+L'identifiant "dao" fait ici appel à la classe définie dans le fichier spring-config.xml :
+
+\begin{lstlisting}
+<bean id="dao" class="ensicaen.tb.mvc.eleves.dao.DAOImpl" destroy-method="destroy" init-method="init">
+</bean>
+\end{lstlisting}
+
+Le XML va permettre d'instancier le bean, tandis que c'est le java qui l'utilisera.
 
 \end{document}
 
