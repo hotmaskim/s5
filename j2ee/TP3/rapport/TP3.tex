@@ -279,6 +279,57 @@ Voici un schéma qui résume un peu plus clairement ce qui a été dit :
 \end{figure}
 
 \newpage
+\section{Utilisation des transaction}
+Lorsque l'on fait plusieurs ajouts à la suite au sein de la base de données, nous pouvons décider que si un ne fonctionne pas 
+alors les autres ne doivent pas être pris en compte. C'est ce que nous avons fait dans la suite du TP.
+
+Dans un premier temps, nous rajoutons les fonctions "saveMany" et "deleteMany" dans la couche service. Chacune d'entre elle faisant appel 
+à des fonctions déjà existantes au sein des DAO.
+\begin{lstlisting}
+void saveMany(Eleve[] eleves);
+void deleteMany(int[] ids);
+\end{lstlisting}
+
+Nous indiquons maintenant au sein du fichier de configuration de Spring que pour ces deux fonctions, nous souhaitons qu'il y ait ouverture d'une transaction.
+Pour cela, créons un bean \textit{transactionManager} que va se charger de gérer les transactions.
+\begin{lstlisting}
+<!-- Définition du gestionnaire de transaction -->
+<bean id="transactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource" />
+</bean>
+\end{lstlisting}
+Nous pouvons remarquer que ce dernier va utiliser la base de données (propriété dataSource présente). En effet, les transactions sont des mécanismes
+implémentés au sein de la base. Lorsqu'une transaction est ouverte, il y aura un ROLLBACK de toutes le modifications si une requête échoue.
+
+Dans un deuxième temps, nous devons modifier la définition du bean "service" pour qu'il soit de type \textit{TransactionProxyFactoryBean}. 
+Nous le lions à \textit{transactionManager} et y définissons comme propriétés la classe d'implémentation de la couche service (\textit{IServiceImpl}). 
+Nous indiquons enfin les méthodes qui déclencheront une transaction (\textit{saveMany, deleteMany}). Pour chacune, nous indiquons une 
+condition quand à l'ouverture d'une transaction (toujours une nouvelle; si une présente, on l'utilise; ...). Ici, nous avons mis \textit{PROPAGATION\_REQUIRED}
+qui indique qu'elles doivent être utilisé dans une transaction, si une existe, elle est utilisée, sinon on en crée une.
+\begin{lstlisting}
+<bean id="service"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+	<property name="transactionManager" ref="transactionManager" />
+	<property name="target">
+		<bean class="ensicaen.tb.mvc.eleves.service.IServiceImpl">
+			<property name="dao" ref="dao" />
+		</bean>
+	</property>
+	<property name="transactionAttributes">
+		<props>
+			<prop key="saveMany">PROPAGATION_REQUIRED</prop>
+			<prop key="deleteMany">PROPAGATION_REQUIRED</prop>
+		</props>
+	</property>
+</bean>
+\end{lstlisting}
+
+\begin{figure}[H]
+	\center
+	\includegraphics[width=15cm]{img/springibatistransac.pdf}
+	\caption{Architecture d'utilisation de spring avec les transactions}
+\end{figure}
 
 \end{document}
 
