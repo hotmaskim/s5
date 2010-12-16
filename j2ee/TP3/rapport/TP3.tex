@@ -111,20 +111,42 @@ instancie la classe qui gère les service, la classe du DAO sera automatiquement
 \section{Utilisation d'iBatis}
 
 iBatis est une nouvelle couche qui vient s'insérer entre le DAO et la couche d'accès aux données (JDBC).
-La connection au SGBD est désormais gérée dans le XML ( :
+Dans le fichier spring-config.xml, on va définir de nouveaux Bean. Ces beans vont nous permettre de déporter tous les appels à des fonctionnalitées de 
+JDBC du code Java vers le XML.
 
+Si l'on part du coté de la couche d'accès aux données et qu'on remonte vers le DAO, voici les étapes a effectuer dans l'ordre :
 
-
-Le nouveau DAO appellé DAOImplCommon est définit ainsi :
+Etape 1 : La connection au SGBD est faite dans le bean \textit{dataSource} : 
 
 \begin{lstlisting}
-public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO {
+<!-- la source de données utilisant jdbc -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource"
+		destroy-method="destroy">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://postgres/clinique" />
+		<property name="username" value="thoraval" />
+		<property name="password" value="canari" />
+	</bean>
 \end{lstlisting}
-Il remplace la précédente classe DAOImpl.
-Il implémente naturellement l'interface IDAO, mais surtout il hérite de SqlMapClientSupport qui est une classe de la bibliothèque iBatis.
 
+Etape 2 : On souhaite déporter la classe métier Eleve et ses accès aux données dans le XML. On définit donc ici un lien vers la 
+définition de cette classe en XML et à ses méthodes :
 
-Dans le fichier spring-config.xml on définit le bean DAO ainsi :
+\begin{lstlisting}
+<!-- SqlMapClient -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="configLocation" value="classpath:sql-map-config-postgres.xml" />
+	</bean>
+\end{lstlisting}
+
+On remarque que ce bean est lié au Bean précédent \textit{dataSource}, en effet l'accès aux données des élèves requiert une connection au SGDB.
+
+Etape 3 : L'étape située en amont de l'accès aux données, c'est la définition du bean du DAO. Ce bean est lié au bean \textit{sqlMapClient} précédent
+à travers lequel il va effectuer ses requêtes sur les élèves.
 
 \begin{lstlisting}
 <!-- La classe DAO -->
@@ -133,7 +155,25 @@ Dans le fichier spring-config.xml on définit le bean DAO ainsi :
 	</bean>
 \end{lstlisting}
 
+Comme on le voit ici, on a définit pour l'occasion un nouveau DAO en java : \textit{DAOImplCommon}
 
+\begin{lstlisting}
+public class DAOImplCommon extends SqlMapClientDaoSupport implements IDAO {
+\end{lstlisting}
+
+Il remplace la précédente classe DAOImpl.
+Il implémente naturellement l'interface IDAO, mais surtout il hérite de SqlMapClientSupport qui est une classe de la bibliothèque iBatis.
+
+Le fichier  \textit{sql-map-config-postgres.xml} permet de "mapper" toutes nos déclaration de classes métiers en XML. On a vu au dessus qu'il était lié au bean
+\textit{sqlMapClient}. 
+
+\begin{lstlisting}
+<sqlMapConfig>
+	<sqlMap resource="eleve-postgres.xml" />
+</sqlMapConfig>
+\end{lstlisting}
+
+Dans \textit{sql-map-config-postgres.xml} on a renseigné une ressource, la classe Eleve. Grâce à ce renseignement on aura accès au fichier \textit{eleve-postgres.xml}. Dans ce fichier est défini la classe Eleve. On a ainsi déporté comme prévu l'ensemble des commandes JDBC dans le XML.
 
 
 \begin{lstlisting}
