@@ -79,7 +79,7 @@ L'identifiant "dao" fait ici appel au bean définie dans le fichier spring-confi
 Le XML va permettre d'instancier le bean, tandis que c'est le java qui l'utilisera.
 On remarque que l'on ignore dans le code java de quelle implémentation du IDAO il s'agit. Ce choix est fait dans le XML et permet de diminuer les dépendances entre les couches.
 
-On vient de mettre en place Spring pour la couche DAO et on fait de même pour la couche service grâce à un bean "service qui représentera une instance de notre classe de service.
+On vient de mettre en place Spring pour la couche DAO et on fait de même pour la couche service grâce à un bean "service" qui représentera une instance de notre classe de service.
 
 Dans le fichier Application.java, on appellera alors l'instance de service ainsi : 
 
@@ -88,7 +88,7 @@ service =(IService) (new XmlBeanFactory(new ClassPathResource("spring-config.xml
 \end{lstlisting}
 
 On remarque que l'on fait appelle à un IService et non plus à une ServiceImpl, ce qui limite les dépendances (comme pour le DAO).
-Notre implémentation d'IService est également défninie dans le fichier spring-config.xml :
+Notre implémentation d'IService est également définie dans le fichier spring-config.xml :
 
 \begin{lstlisting}
 <!-- La classe Service -->
@@ -98,7 +98,7 @@ Notre implémentation d'IService est également défninie dans le fichier spring
 \end{lstlisting}
 
 On constate qu'elle a comme attribut un "dao", qui fait bien entendu référence au "dao" définit dans le même fichier en XML. Ainsi lorsque l'on
-instancie la classe qui gère les service, la classe du DAO sera automatiquement intanciée grâce au XML.
+instancie la classe qui gère les service, la classe du DAO sera automatiquement instanciée.
 
 \begin{figure}[H]
 	\center
@@ -111,12 +111,12 @@ instancie la classe qui gère les service, la classe du DAO sera automatiquement
 \section{Utilisation d'iBatis}
 
 iBatis est une nouvelle couche qui vient s'insérer entre le DAO et la couche d'accès aux données (JDBC).
-Dans le fichier spring-config.xml, on va définir de nouveaux Bean. Ces beans vont nous permettre de déporter tous les appels à des fonctionnalitées de 
+Dans le fichier spring-config.xml, on va définir de nouveaux Bean. Ces beans vont nous permettre de déporter tous les appels à des fonctionnalités de 
 JDBC du code Java vers le XML.
 
 Si l'on part du coté de la couche d'accès aux données et qu'on remonte vers le DAO, voici les étapes a effectuer dans l'ordre :
 
-Etape 1 : La connection au SGBD est faite dans le bean \textit{dataSource} : 
+Etape 1 : La connexion au SGBD est faite dans le bean \textit{dataSource} : 
 
 \begin{lstlisting}
 <!-- la source de données utilisant jdbc -->
@@ -165,7 +165,6 @@ Il implémente naturellement l'interface IDAO, mais surtout il hérite de SqlMap
 
 
 Le fichier  \textit{sql-map-config-postgres.xml} permet de "mapper" nos classes métiers à des tables de la base de données.
-\textit{sqlMapClient}. 
 
 \begin{lstlisting}
 <sqlMapConfig>
@@ -173,7 +172,7 @@ Le fichier  \textit{sql-map-config-postgres.xml} permet de "mapper" nos classes 
 </sqlMapConfig>
 \end{lstlisting}
 
-Dans \textit{sql-map-config-postgres.xml} on a renseigné le fichier \textit{eleve-postgres.xml}. Dans ce fichier est défini le mapping de classe Eleve avec une table associée dans la base de donnée. Ce mapping va permettre à iBatis d'instancier un bean de type Eleve à partir des informations de la base de données, tout cela sans que le développeur n'est à intervenir. De plus, une insertion dans la base d'un Eleve va automatiquement mettre l'objet avec l'id généré.
+Dans \textit{sql-map-config-postgres.xml} on a renseigné le fichier \textit{eleve-postgres.xml}. Dans ce fichier est défini le mapping de classe Eleve avec une table associée dans la base de donnée. Ce mapping va permettre à iBatis d'instancier un bean de type Eleve à partir des informations de la base de données, tout cela sans que le développeur n'est à intervenir. De plus, une insertion dans la base d'un Eleve va automatiquement mettre à jour l'objet avec l'id généré.
 On a ainsi déporté toute la partie JDBC au sein de fichier XML.
 
 \begin{lstlisting}
@@ -234,7 +233,7 @@ On a ainsi déporté toute la partie JDBC au sein de fichier XML.
 </sqlMap>
 \end{lstlisting}
 
-L'appel aux fonctions de cette classe Eleve, se feront comme précédemment dans le DAO, en l'occurance ici dans la classe \textit{DaoImplCommon}.
+L'appel aux fonctions de cette classe Eleve, se feront comme précédemment dans le DAO, en l'occurrence ici dans la classe \textit{DaoImplCommon}.
 En revanche l'appel est ici transparent puisque l'accès à la BDD est géré dans le XML :
 Voici un exemple pour la suppression d'un élève :
 
@@ -250,27 +249,7 @@ public void deleteOne(int id) {
 
 Comme précédemment, pour diminuer le couplage, l'implémentation de la couche service est définie dans le fichier \textit{spring-config.xml} :
 
-\begin{lstlisting}
-<bean id="service"
-		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager" ref="transactionManager" />
-		<property name="target">
-			<bean class="ensicaen.tb.mvc.eleves.service.IServiceImpl">
-				<property name="dao" ref="dao" />
-			</bean>
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="saveMany">PROPAGATION_REQUIRED</prop>
-				<prop key="deleteMany">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-\end{lstlisting}
-
-Ici aussi l'instanciation de la classe de service provoque l'instanciation de la classe du DAO. (rajouter un comentaire sur les transactions)
-
-Voici un schéma qui résume un peu plus clairement ce qui a été dit :
+Voici un schéma qui résume succinctement ce qui a été dit :
 
 \begin{figure}[H]
 	\center
