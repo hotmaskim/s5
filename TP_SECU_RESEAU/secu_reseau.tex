@@ -1,0 +1,62 @@
+\documentclass[a4paper,12pt]{article} 
+\usepackage[T1]{fontenc}              
+\usepackage[frenchb]{babel} % césures, titres français
+\usepackage[utf8]{inputenc} % encodage
+\usepackage[a4paper,left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % marges
+\usepackage{graphicx} % insertion d'images
+\usepackage{rotating}
+\usepackage{float} % permet d'utiliser H pour placer un flottant obligatoirement
+\usepackage{pdfpages} % inclusion de PDF au sein du document
+\usepackage{listings}
+\pagestyle{plain} % pied de pages simples
+
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex} % espace entre les paragraphes
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+\lstset{% general command to set parameter(s)
+basicstyle=\ttfamily, % print whole listing small
+keywordstyle=\color{black}\bfseries\underbar,
+% underlined bold black keywords
+identifierstyle=, % nothing happens
+commentstyle=\color{white}, % white comments
+showstringspaces=false,
+numbers=left,
+language=java,
+breaklines=true,
+frame=tblr} % no special string spaces
+
+%%%% debut macro %%%%
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                           {-3.5ex \@plus -1ex \@minus -.2ex}%
+                           {2.3ex \@plus.2ex}%
+                           {\normalfont\Large\bfseries}}
+\makeatother
+%%%% fin macro %%%%
+
+
+
+% Def
+\newcommand{\code}[1]{{\lstinline{#1}}}
+
+\begin{document}
+\newpage
+\title{TP Sécurité des réseaux}
+\date{}
+\author{BRIZAI Olivier\\THORAVAL Maxime}
+\maketitle
+
+
+
+\begin{figure}[H]
+	\center
+	\includegraphics[width=15cm]{img/..png}
+	\caption{}
+\end{figure}
+
+\end{document}
+
+
+
+
